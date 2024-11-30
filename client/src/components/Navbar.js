@@ -8,6 +8,7 @@ const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function NavbarComponent() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // Comprobar autenticación
@@ -18,6 +19,8 @@ function NavbarComponent() {
         setIsAuthenticated(response.data.authenticated);
       } catch (error) {
         setIsAuthenticated(false);
+      } finally {
+        setLoading(false); // Carga finalizada
       }
     };
     checkAuth();
@@ -39,7 +42,11 @@ function NavbarComponent() {
     } catch (error) {
       console.error('Error en el cierre de sesión:', error.response?.data || error.message);
     }
-  };
+  }; 
+  
+  if (loading) {
+    return null; // Puedes devolver un Spinner aquí
+  }
 
   return (
     <Navbar id="main-navbar" bg="dark" variant="dark" expand="lg">
