@@ -1,7 +1,7 @@
 // src/pages/Dashboard.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllCharacters, createCharacter, getCharactersByUser } from '../services/characterService';
+import { createCharacter, getCharactersByUser } from '../services/characterService';
 import { createGame, joinGame, getGameDetails, getAllGames } from '../services/gameService';
 import { getCurrentUser } from '../services/userService.js';
 import CreateEntityForm from '../components/createEntityForm.js';
@@ -11,7 +11,7 @@ import { Button, Row, Col, Form, Toast, Modal, Card } from 'react-bootstrap';
 import ProtectedRoute from '../components/ProtectedRoute.js';
 import LoadingSpinner from '../components/LoadingSpinner.js';
 import CharacterSelectList from '../components/CharacterSelectList.js';
-import { deleteCharacter } from '../services/characterService';
+// import { deleteCharacter } from '../services/characterService';
 
 function Dashboard({ isAuthenticated }) {
   const [characters, setCharacters] = useState([]);
@@ -19,14 +19,14 @@ function Dashboard({ isAuthenticated }) {
   const [error, setError] = useState(null);
   const [gameName, setGameName] = useState('');
   const [gameId, setGameId] = useState('');
-  const [invitationLink, setInvitationLink] = useState('');
+  // const [invitationLink, setInvitationLink] = useState('');
   const [message, setMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [showModal, setShowModal] = useState(false); // Control del modal de creación
   const navigate = useNavigate();
-  const [showCharacterListModal, setShowCharacterListModal] = useState(false); // Estado para controlar el modal de personajes
+  // const [showCharacterListModal, setShowCharacterListModal] = useState(false); // Estado para controlar el modal de personajes
   const [selectedCharacterId, setSelectedCharacterId] = useState(null); // ID del personaje seleccionado
-  const [showCharacterDetailsModal, setShowCharacterDetailsModal] = useState(false); // Estado para controlar el modal de detalles
+  // const [showCharacterDetailsModal, setShowCharacterDetailsModal] = useState(false); // Estado para controlar el modal de detalles
   const [showCharacterSelectModal, setShowCharacterSelectModal] = useState(false);
   const [joinedGames, setJoinedGames] = useState([]);
 
