@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Route, Routes } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -16,11 +16,11 @@ import Navbar from './components/Navbar.js';
 import LoadingSpinner from './components/LoadingSpinner';
 import './styles/styles.css';
 
-const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
+// const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   // Verificar si el usuario está autenticado
   useEffect(() => {
