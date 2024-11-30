@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -19,24 +19,12 @@ import './styles/styles.css';
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Verificar si el usuario está autenticado
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.get(BACKENDURL + '/api/auth/success', { withCredentials: true });
-        setIsAuthenticated(response.data.authenticated);
-      } catch (error) {
-        console.error('Error al verificar autenticación:', error);
-        setIsAuthenticated(false);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    checkAuth();
   }, []);
 
   // Mostrar el spinner de carga mientras se verifica la autenticación
