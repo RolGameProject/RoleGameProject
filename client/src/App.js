@@ -13,14 +13,14 @@ import GameRoom from './pages/GameRoom';
 // import Interaction from './pages/Interaction';
 // import TurnManagement from './pages/TurnManagement';
 import Navbar from './components/Navbar.js';
-import LoadingSpinner from './components/LoadingSpinner';
+// import LoadingSpinner from './components/LoadingSpinner';
 import './styles/styles.css';
 
 // const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   // Verificar si el usuario está autenticado
   useEffect(() => {
@@ -28,9 +28,9 @@ function App() {
   }, []);
 
   // Mostrar el spinner de carga mientras se verifica la autenticación
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  // if (loading) {
+  //   return <LoadingSpinner />;
+  // }
 
   return (
     <>
