@@ -9,7 +9,6 @@
     "test:games": "jest --testPathPattern=game.test.js",
     "test:enemies": "jest --testPathPattern=enemy.test.js",
     "test:interaction": "jest --testPathPattern=interaction.test.js",
-    "test:turns": "jest --testPathPattern=turn.test.js",
     "test:integration": "jest --testPathPattern=integration.test.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix client",
