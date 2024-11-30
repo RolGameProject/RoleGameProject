@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
+console.log('Backend URL:', BACKENDURL);
 
 function NavbarComponent() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,6 +17,7 @@ function NavbarComponent() {
     const checkAuth = async () => {
       try {
         const response = await axios.get(BACKENDURL + '/api/auth/success', { withCredentials: true });
+        console.log('Auth response:', response.data);
         setIsAuthenticated(response.data.authenticated);
       } catch (error) {
         setIsAuthenticated(false);
