@@ -19,7 +19,7 @@ function GameRoom({ isAuthenticated }) {
   const [enemies, setEnemies] = useState([]);
   const [showCreateEnemyModal, setShowCreateEnemyModal] = useState(false);
   // const [selectedEntity, setSelectedEntity] = useState(null); // Entidad seleccionada para mostrar en el modal
-  const [entityType, setEntityType] = useState(''); // Tipo de la entidad (character/enemy)
+  // const [entityType, setEntityType] = useState(''); // Tipo de la entidad (character/enemy)
   const [showInteractionModal, setShowInteractionModal] = useState(false); // Modal para interacción
   const [selectedCharacter, setSelectedCharacter] = useState(null); // Personaje seleccionado
   const [selectedEnemy, setSelectedEnemy] = useState(null); // Enemigo seleccionado
