@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../components/ProtectedRoute';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -73,7 +73,7 @@ function GameRoom({ isAuthenticated }) {
     }
 
     fetchAllData();
-  }, [gameId, navigate]);
+  }, [gameId, navigate, fetchAllData]);
 
   const handleCreateEnemy = async (enemyData) => {
     try {
