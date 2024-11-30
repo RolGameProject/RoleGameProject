@@ -1,5 +1,13 @@
 {
-  "rewrites":  [
-    {"source": "/(.*)", "destination": "/"}
+  "builds": [
+    "config": {
+      "distDir": "build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/client/$1"
+    }
   ]
 }
