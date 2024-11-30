@@ -40,13 +40,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          {/* <Route path="/create-character" element={<CreateCharacter />} />
-          <Route path="/characters" element={<CharacterList />} />
-          <Route path="/create-enemy" element={<CreateEnemy />} />
-          <Route path="/enemies" element={<EnemyList />} /> */}
           <Route path="/game-room" element={<GameRoom />} />
-          {/* <Route path="/interact" element={<Interaction />} /> */}
-          {/* <Route path="/turn-management" element={isAuthenticated ? <TurnManagement />} /> */}
         </Routes>
       </div>
     </>
