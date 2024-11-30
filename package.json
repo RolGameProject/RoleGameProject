@@ -1,0 +1,43 @@
+{
+  "name": "role-game-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:characters": "jest --testPathPattern=character.test.js",
+    "test:users": "jest --testPathPattern=auth.test.js",
+    "test:games": "jest --testPathPattern=game.test.js",
+    "test:enemies": "jest --testPathPattern=enemy.test.js",
+    "test:interaction": "jest --testPathPattern=interaction.test.js",
+    "test:turns": "jest --testPathPattern=turn.test.js",
+    "test:integration": "jest --testPathPattern=integration.test.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix client",
+    "server": "nodemon server/api/index.js"
+  },
+  "keywords": [],
+  "author": "Carlos Roman Aguilera",
+  "license": "ISC",
+  "description": "A web app role game",
+  "dependencies": {
+    "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "mongodb": "^6.10.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-google-oauth20": "^2.0.0",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.1.2",
+    "mongoose": "^8.7.3",
+    "nodemon": "^3.1.7",
+    "passport": "^0.7.0",
+    "supertest": "^7.0.0"
+  }
+}

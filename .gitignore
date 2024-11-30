@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+
+# Vercel
+.vercel/
+
+# Logs
+*.log
+
+# Archivos de configuración
+.env
+.env.local
+.env.production
+
+# Otros archivos innecesarios
+.DS_Store
+*.pem
+*.key
