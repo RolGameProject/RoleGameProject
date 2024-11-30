@@ -20,7 +20,7 @@ import './styles/styles.css';
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // Verificar si el usuario está autenticado
   useEffect(() => {
