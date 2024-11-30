@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Route, Routes } from 'react-router-dom';
 // import axios from 'axios';
 import Home from './pages/Home';
@@ -23,9 +23,9 @@ function App() {
   // const [loading, setLoading] = useState(true);
 
   // Verificar si el usuario está autenticado
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, []);
+  // }, []);
 
   // Mostrar el spinner de carga mientras se verifica la autenticación
   // if (loading) {
