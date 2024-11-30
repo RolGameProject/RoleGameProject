@@ -56,14 +56,11 @@ function GameRoom({ isAuthenticated }) {
     }
   };
 
-  const fetchAllData = async () => {
-    setIsLoading(true);
-    await Promise.all([fetchGameDetails(), fetchEnemies()]);
-    setIsLoading(false);
-
-    // console.log('Detalles de la partida en el estado:', gameDetails);
-    // console.log('Enemigos en el estado:', enemies);
-  };
+const fetchAllData = useCallback(async () => {
+  setIsLoading(true);
+  await Promise.all([fetchGameDetails(), fetchEnemies()]);
+  setIsLoading(false);
+}, [fetchGameDetails, fetchEnemies]);
 
 
   useEffect(() => {
