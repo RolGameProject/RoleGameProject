@@ -33,9 +33,9 @@ function GameRoom({ isAuthenticated }) {
 
   const { gameId, discordLink } = location.state || {};
 
-  const fetchGameDetails = async () => {
+   const fetchGameDetails = useCallback(async () => {
     try {
-      const user = await getCurrentUser();
+      const user = await getCurrentUser(); // Asegúrate de que esta función esté definida y funcione correctamente
       const response = await axios.get(`/api/games/${gameId}/details`);
       const game = response.data;
 
@@ -45,16 +45,17 @@ function GameRoom({ isAuthenticated }) {
       console.error('Error al obtener los detalles de la partida:', error);
       navigate('/dashboard');
     }
-  };
+  }, [gameId, navigate]); // Dependencias de fetchGameDetails
 
-  const fetchEnemies = async () => {
+  // Memorizar fetchEnemies con useCallback
+  const fetchEnemies = useCallback(async () => {
     try {
       const response = await axios.get('/api/enemies');
       setEnemies(response.data);
     } catch (error) {
       console.error('Error al obtener la lista de enemigos:', error);
     }
-  };
+  }, []);
 
 const fetchAllData = useCallback(async () => {
   setIsLoading(true);
