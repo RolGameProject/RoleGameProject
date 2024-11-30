@@ -8,8 +8,8 @@ import Button from '../components/Button.js';
 import CreateEntityForm from '../components/createEntityForm.js';
 import EntityCardList from '../components/EntityCardList'; // Importar EntityCardList
 import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
-import EntityDetailsModal from '../components/EntityDetailsModal.js';
-import { interact } from '../services/interactionService.js'
+// import EntityDetailsModal from '../components/EntityDetailsModal.js';
+// import { interact } from '../services/interactionService.js'
 import InteractionResultModal from '../components/InteractionResultModal';
 
 function GameRoom({ isAuthenticated }) {
@@ -18,7 +18,7 @@ function GameRoom({ isAuthenticated }) {
   const [gameDetails, setGameDetails] = useState(null);
   const [enemies, setEnemies] = useState([]);
   const [showCreateEnemyModal, setShowCreateEnemyModal] = useState(false);
-  const [selectedEntity, setSelectedEntity] = useState(null); // Entidad seleccionada para mostrar en el modal
+  // const [selectedEntity, setSelectedEntity] = useState(null); // Entidad seleccionada para mostrar en el modal
   const [entityType, setEntityType] = useState(''); // Tipo de la entidad (character/enemy)
   const [showInteractionModal, setShowInteractionModal] = useState(false); // Modal para interacción
   const [selectedCharacter, setSelectedCharacter] = useState(null); // Personaje seleccionado
@@ -83,11 +83,6 @@ function GameRoom({ isAuthenticated }) {
     } catch (error) {
       console.error('Error al crear el enemigo:', error);
     }
-  };
-
-  const handleShowDetails = (entity, type) => {
-    setSelectedEntity(entity);
-    setEntityType(type);
   };
 
   const handleInteraction = async () => {
