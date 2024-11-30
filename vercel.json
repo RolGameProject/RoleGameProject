@@ -17,12 +17,7 @@
         },
         {
           "src": "/(.*)",         
-          "dest": "/client/$1"     
-        },
-        {
-          "src": "/[^.]+",
-          "dest": "/",
-          "status": 200
-    }
+          "dest": "/client/build/index.html"     
+        }
     ]
   }
