@@ -1,22 +1,6 @@
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-const renderAbilities = (abilities) => {
-  return abilities.map((ability, index) => (
-    <li key={index}>
-      {ability.name}: {ability.value}
-    </li>
-  ));
-};
-
-const renderEffects = (effects) => {
-  return effects.map((effect, index) => (
-    <li key={index}>
-      {effect.name}: {effect.duration} turnos, Potencia: {effect.power}
-    </li>
-  ));
-};
-
 const CharacterSelectList = ({ characters, onSelectCharacter }) => {
   return (
     <Row className="g-3">
