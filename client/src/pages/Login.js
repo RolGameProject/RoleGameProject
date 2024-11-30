@@ -1,12 +1,12 @@
 // src/pages/Login.js
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function Login() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Función para redirigir a Google OAuth
   const handleLogin = () => {
