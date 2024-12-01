@@ -12,7 +12,7 @@ import Dashboard from './pages/Dashboard';
 import GameRoom from './pages/GameRoom';
 // import Interaction from './pages/Interaction';
 // import TurnManagement from './pages/TurnManagement';
-import Navbar from 'components/Navbar';
+import Navbar from './components/Navbar';
 // import LoadingSpinner from './components/LoadingSpinner';
 import './styles/styles.css';
 
