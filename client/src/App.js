@@ -1,6 +1,6 @@
 // src/App.js
 // import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import axios from 'axios';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -33,7 +33,7 @@ function App() {
   // }
 
   return (
-    <>
+    <Router>
       <Navbar />
       <div className="container mt-4">
         <Routes>
@@ -43,7 +43,7 @@ function App() {
           <Route path="/game-room" element={<GameRoom />} />
         </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 
