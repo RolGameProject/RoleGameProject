@@ -12,6 +12,7 @@ function NavbarComponent() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  console.log('Dentro de Navbar component');
   // Comprobar autenticación
   useEffect(() => {
     console.log('Se ha entrado en useEffect');
