@@ -127,9 +127,9 @@ module.exports = async (req, res) => {
 };
 
 // Si este archivo es ejecutado directamente (no importado), iniciamos el servidor
-if (require.main === module && process.env.NODE_ENV !== 'test') {
-    console.log('Archivo ejecutado directamente, iniciando servidor...');
-    startServer();
-} else {
-    console.log('Archivo importado como módulo, no se inicia el servidor automáticamente');
-}
+// if (require.main === module && process.env.NODE_ENV !== 'test') {
+//     console.log('Archivo ejecutado directamente, iniciando servidor...');
+//     startServer();
+// } else {
+//     console.log('Archivo importado como módulo, no se inicia el servidor automáticamente');
+// }
