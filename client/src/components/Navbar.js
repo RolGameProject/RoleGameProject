@@ -8,7 +8,8 @@ const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 console.log('Backend URL:', BACKENDURL);
 
 function NavbarComponent({isAuthenticated}) {
-
+const navigate = useNavigate();
+  
   // Función para cerrar sesión
   const handleLogout = async () => {
     try {
@@ -16,7 +17,7 @@ function NavbarComponent({isAuthenticated}) {
         withCredentials: true,
       });
       if (response.status === 200) {
-        setIsAuthenticated(false); // Actualiza el estado de autenticación
+        isAuthenticated=false; // Actualiza el estado de autenticación
         navigate('/'); // Redirige al inicio
 
       } else {
