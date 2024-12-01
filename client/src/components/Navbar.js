@@ -1,5 +1,5 @@
 // src/components/Navbar.js
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
