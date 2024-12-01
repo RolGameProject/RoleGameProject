@@ -3,7 +3,9 @@
 // import { Link } from 'react-router-dom';
 
 function Home() {
-
+  return (
+    <div>Página de inicio</div>
+  )
 }
 
 export default Home;
