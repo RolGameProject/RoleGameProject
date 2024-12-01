@@ -19,8 +19,10 @@ function NavbarComponent() {
         const response = await axios.get(BACKENDURL + '/api/auth/success', { withCredentials: true });
         console.log('Auth response:', response.data);
         setIsAuthenticated(response.data.authenticated);
+        setLoading(false);
       } catch (error) {
         setIsAuthenticated(false);
+        setLoading(false);
       } finally {
         setLoading(false); // Carga finalizada
       }
