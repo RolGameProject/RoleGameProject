@@ -12,7 +12,7 @@ function App() {
   console.log("Cargando la aplicación");
 
   return (
-    <Router> {/* Asegúrate de envolver tus rutas con Router */}
+    <BrowserRouter> 
       <Navbar />
       <div className="container mt-4">
         <Routes>
@@ -22,7 +22,7 @@ function App() {
           <Route path="/game-room" element={<GameRoom />} />
         </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
