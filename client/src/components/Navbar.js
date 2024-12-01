@@ -51,6 +51,7 @@ function NavbarComponent() {
   }; 
   
   if (loading) {
+  console.log('Cargando...');
     return null; // Puedes devolver un Spinner aquí
   }
 
