@@ -26,6 +26,7 @@ function NavbarComponent() {
         console.error('Error de autenticación:', error);
         setIsAuthenticated(false);
       } finally {
+      console.log('Carga finalizada');
         setLoading(false); // Carga finalizada
       }
     };
@@ -52,7 +53,7 @@ function NavbarComponent() {
   
   if (loading) {
   console.log('Cargando...');
-    return null; // Puedes devolver un Spinner aquí
+    return <div>Cargando...</div>; 
   }
 
   return (
