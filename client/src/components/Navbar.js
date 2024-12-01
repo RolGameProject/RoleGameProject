@@ -5,83 +5,68 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
-console.log('Backend URL desde Navbar:', BACKENDURL);
 
 function NavbarComponent() {
-  console.log('Dentro de Navbar component1');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
-  console.log('Dentro de Navbar component2');
-  // Comprobar autenticación
-  useEffect(() => {
-    console.log('Se ha entrado en useEffect');
-    const checkAuth = async () => {
-    console.log('Verificando autenticación...');
-      try {
-        const response = await axios.get(BACKENDURL + '/api/auth/success', { withCredentials: true });
-        console.log('Auth response:', response.data);
-        setIsAuthenticated(response.data.authenticated);
-      } catch (error) {
-        console.error('Error de autenticación:', error);
-        setIsAuthenticated(false);
-      } finally {
-      console.log('Carga finalizada');
-        setLoading(false); // Carga finalizada
-      }
-    };
-    checkAuth();
-  }, []);
+  // Comprobar autenticación
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get(BACKENDURL + '/api/auth/success', { withCredentials: true });
+        setIsAuthenticated(response.data.authenticated);
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+    checkAuth();
+  }, []);
 
-  // Función para cerrar sesión
-  const handleLogout = async () => {
-    try {
-      console.log('Dentro de handleLogout en Navbar');
-      const response = await axios.get(BACKENDURL + '/api/auth/logout', {
-        withCredentials: true,
-      });
-      if (response.status === 200) {
-        setIsAuthenticated(false); // Actualiza el estado de autenticación
-        navigate('/'); // Redirige al inicio
-      } else {
-        console.error('Error al cerrar sesión:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error en el cierre de sesión:', error.response?.data || error.message);
-    }
-  }; 
+  // Función para cerrar sesión
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get(BACKENDURL + '/api/auth/logout', {
+        withCredentials: true,
+      });
+      if (response.status === 200) {
+        setIsAuthenticated(false); // Actualiza el estado de autenticación
+        navigate('/'); // Redirige al inicio
 
-  if (loading) {
-    console.log('Cargando...');
-    return <div>Cargando...</div>; 
-  }
+      } else {
+        console.error('Error al cerrar sesión:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error en el cierre de sesión:', error.response?.data || error.message);
+    }
+  };
 
-  return (
-    <Navbar id="main-navbar" bg="dark" variant="dark" expand="lg">
-      <Container>
-        <Navbar.Brand onClick={() => navigate('/')}>
-          <img
-            src="/assets/ROLE_GAME_PROJECT_BANNER.png"
-            alt="Role Game Project Banner"
-            style={{ maxWidth: '50px', height: 'auto' }}
-          />
-        </Navbar.Brand>
-        <Nav className="ml-auto">
-          {/* Evitar redirecciones innecesarias */}
-          <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-          {isAuthenticated ? (
-            <>
-              <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-              <Nav.Link as={Link} to="/game-room">Partida</Nav.Link>
-              <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
-            </>
-          ) : (
-            <Nav.Link as={Link} to="/login">Iniciar sesión</Nav.Link>
-          )}
-        </Nav>
-      </Container>
-    </Navbar>
-  );
+  return (
+    <Navbar id="main-navbar" bg="dark" variant="dark" expand="lg">
+      <Container>
+        <Navbar.Brand onClick={() => navigate('/')}>
+          <img
+            src="/assets/ROLE_GAME_PROJECT_BANNER.png"
+            alt="Role Game Project Banner"
+            style={{ maxWidth: '50px', height: 'auto' }}
+          />
+        </Navbar.Brand>
+        <Nav className="ml-auto">
+          {/* Evitar redirecciones innecesarias */}
+          <Nav.Link as={Link} to="/">Inicio</Nav.Link>
+          {isAuthenticated ? (
+            <>
+              <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+              <Nav.Link as={Link} to="/game-room">Partida</Nav.Link>
+              <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
+            </>
+          ) : (
+            <Nav.Link as={Link} to="/login">Iniciar sesión</Nav.Link>
+          )}
+        </Nav>
+      </Container>
+    </Navbar>
+  );
 }
+
 export default NavbarComponent;
