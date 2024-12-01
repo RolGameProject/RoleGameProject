@@ -14,6 +14,7 @@ function NavbarComponent() {
 
   // Comprobar autenticación
   useEffect(() => {
+    console.log('Se ha entrado en useEffect');
     const checkAuth = async () => {
     console.log('Verificando autenticación...');
       try {
