@@ -20,7 +20,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/"
+      "dest": "/client/$1"
     }
   ]
 }
