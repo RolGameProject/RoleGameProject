@@ -7,31 +7,7 @@ import axios from 'axios';
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 console.log('Backend URL:', BACKENDURL);
 
-function NavbarComponent() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  console.log('Dentro de Navbar component');
-  // Comprobar autenticación
-  useEffect(() => {
-    console.log('Se ha entrado en useEffect');
-    const checkAuth = async () => {
-    console.log('Verificando autenticación...');
-      try {
-        const response = await axios.get(BACKENDURL + '/api/auth/success', { withCredentials: true });
-        console.log('Auth response:', response.data);
-        setIsAuthenticated(response.data.authenticated);
-      } catch (error) {
-        console.error('Error de autenticación:', error);
-        setIsAuthenticated(false);
-      } finally {
-      console.log('Carga finalizada');
-        setLoading(false); // Carga finalizada
-      }
-    };
-    checkAuth();
-  }, [loading]);
+function NavbarComponent({isAuthenticated}) {
 
   // Función para cerrar sesión
   const handleLogout = async () => {
@@ -51,10 +27,6 @@ function NavbarComponent() {
     }
   }; 
   
-  if (loading) {
-  console.log('Cargando...');
-    return <div>Cargando...</div>; 
-  }
 
   return (
     <Navbar id="main-navbar" bg="dark" variant="dark" expand="lg">
