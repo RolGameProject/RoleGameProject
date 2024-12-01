@@ -15,10 +15,17 @@ require('./config/passportConfig');
 const authRoutes = require('./routes/authRoutes');
 const characterRoutes = require('./routes/characterRoutes');
 
-const FRONTEND=process.env.REACT_APP_FRONTEND_URL;
+const FRONTEND = process.env.REACT_APP_FRONTEND_URL;
 
 // Cargamos las variables de entorno desde el archivo .env
 dotenv.config();
+console.log('Variables de entorno cargadas:', {
+    NODE_ENV: process.env.NODE_ENV,
+    PORT: process.env.PORT,
+    MONGODB_URI: process.env.MONGODB_URI,
+    USE_MEMORY_DB: process.env.USE_MEMORY_DB,
+    FRONTEND
+});
 
 // Creamos una instancia de la aplicación Express
 const app = express();
@@ -29,94 +36,120 @@ app.use(cors({
     origin: FRONTEND,
     credentials: true
 }));
+console.log('CORS configurado con origen:', FRONTEND);
 
 // Configurar sesión para almacenar la sesión del usuario
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'mi_secreto_super_seguro', 
+    secret: process.env.SESSION_SECRET || 'mi_secreto_super_seguro',
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production', 
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60, // 1 hora de duración
-      sameSite: 'lax' 
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60, // 1 hora de duración
+        sameSite: 'lax'
     },
-    store: process.env.NODE_ENV === 'production' // Si estamos en producción, usar MongoStore para persistir la sesión en MongoDB
+    store: process.env.NODE_ENV === 'production'
         ? MongoStore.create({
-            mongoUrl: process.env.MONGODB_URI, // URI de MongoDB (en producción se conecta a MongoDB Atlas)
-            collectionName: 'sessions' // Nombre de la colección para las sesiones
+            mongoUrl: process.env.MONGODB_URI,
+            collectionName: 'sessions'
         })
-        : undefined // En desarrollo no usamos MongoStore, la sesión se maneja en memoria
-  }));
+        : undefined
+}));
+console.log('Sesión configurada correctamente');
 
 // Configuramos Express para que acepte JSON y formularios codificados
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+console.log('Express configurado para JSON y formularios');
 
 // Inicializamos Passport
 app.use(passport.initialize());
 app.use(passport.session());
+console.log('Passport inicializado');
 
 // Función para conectar con la base de datos
 const connectDB = async () => {
+    console.log('Iniciando conexión a la base de datos...');
+    console.log('Estado actual de la conexión:', mongoose.connection.readyState);
+
     if (mongoose.connection.readyState === 0) { // Solo conecta si no hay una conexión activa
-        // Si estamos usando MongoDB en memoria para desarrollo
         if (process.env.USE_MEMORY_DB === 'true') {
-            mongoServer = await MongoMemoryServer.create(); // Iniciamos el servidor en memoria
-            const mongoUri = mongoServer.getUri(); // Obtenemos la URI del servidor en memoria
-            await mongoose.connect(mongoUri); // Conectamos mongoose a esa URI
-            console.log('Conectado a MongoDB en memoria');
-        } else {
-            // Si no, usamos MongoDB Atlas con la URI definida en las variables de entorno
-            const uri = process.env.MONGODB_URI;
+            console.log('Usando MongoDB en memoria...');
             try {
-                // Intentamos conectarnos a MongoDB Atlas
-                await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-                console.log('Conectado a MongoDB Atlas');
+                mongoServer = await MongoMemoryServer.create();
+                const mongoUri = mongoServer.getUri();
+                console.log(`MongoDB en memoria iniciado en: ${mongoUri}`);
+                await mongoose.connect(mongoUri);
+                console.log('Conexión establecida con MongoDB en memoria');
             } catch (error) {
-                // Si ocurre un error, lo mostramos y cerramos el proceso
-                console.error('Error al conectar a MongoDB Atlas:', error);
+                console.error('Error al iniciar MongoDB en memoria:', error);
+                process.exit(1);
+            }
+        } else {
+            const uri = process.env.MONGODB_URI;
+            console.log('Intentando conectar a MongoDB Atlas...');
+            console.log('URI:', uri);
+            try {
+                await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+                console.log('Conexión establecida con MongoDB Atlas');
+            } catch (error) {
+                console.error('Error al conectar a MongoDB Atlas:', error.message);
+                console.error('Detalles completos del error:', error);
                 process.exit(1);
             }
         }
     } else {
-        console.log('Conexión ya establecida con la base de datos');
+        console.log('Ya existe una conexión activa con la base de datos');
     }
 };
 
 // Configuramos las rutas que manejará el servidor
-app.use('/api/games', gameRoutes); // Ruta para manejar las partidas
-app.use('/api/auth', authRoutes); // Ruta para manejar la autenticación
-app.use('/api/characters', characterRoutes); // Ruta para manejar personajes
-app.use('/api/enemies', enemyRoutes); // Ruta para manejar enemigos
-app.use('/api/interaction', interactionRoutes); // Ruta para manejar interacciones
+app.use('/api/games', gameRoutes);
+console.log('Ruta /api/games configurada');
+app.use('/api/auth', authRoutes);
+console.log('Ruta /api/auth configurada');
+app.use('/api/characters', characterRoutes);
+console.log('Ruta /api/characters configurada');
+app.use('/api/enemies', enemyRoutes);
+console.log('Ruta /api/enemies configurada');
+app.use('/api/interaction', interactionRoutes);
+console.log('Ruta /api/interaction configurada');
 // app.use('/api/turns', turnRoutes); // Ruta para manejar los turnos
 
 // Función para iniciar el servidor
 const startServer = async () => {
-    // Conectamos a la base de datos antes de iniciar el servidor
+    console.log('Iniciando servidor...');
     await connectDB();
 
-    // Iniciamos el servidor en el puerto definido
     const server = app.listen(PORT, () => {
         console.log(`Servidor escuchando en el puerto ${PORT}`);
     });
 
-    // Función para cerrar el servidor y la conexión con la base de datos
     const shutdown = async () => {
-        if (mongoServer) await mongoServer.stop(); // Detenemos el servidor de MongoDB en memoria
-        await mongoose.connection.close(); // Cerramos la conexión con MongoDB
-        server.close(); // Cerramos el servidor Express
+        console.log('Cerrando servidor...');
+        if (mongoServer) {
+            console.log('Deteniendo MongoDB en memoria...');
+            await mongoServer.stop();
+        }
+        console.log('Cerrando conexión con MongoDB...');
+        await mongoose.connection.close();
+        console.log('Cerrando servidor Express...');
+        server.close(() => {
+            console.log('Servidor cerrado correctamente');
+        });
     };
 
-    // Configuramos el servidor para que cierre correctamente al recibir señales de terminación
-    process.on('SIGINT', shutdown); // Para el proceso cuando se interrumpe
-    process.on('SIGTERM', shutdown); // Para el proceso cuando se termina de manera limpia
+    process.on('SIGINT', shutdown);
+    process.on('SIGTERM', shutdown);
 };
 
 module.exports = app;
 
 // Si este archivo es ejecutado directamente (no importado), iniciamos el servidor
 if (require.main === module && process.env.NODE_ENV !== 'test') {
-    startServer(); // Iniciamos el servidor
+    console.log('Archivo ejecutado directamente, iniciando servidor...');
+    startServer();
+} else {
+    console.log('Archivo importado como módulo, no se inicia el servidor automáticamente');
 }
