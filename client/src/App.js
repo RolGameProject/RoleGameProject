@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Corregimos Router
+import { BrowserRouter, Route, Routes } from 'react-router-dom'; 
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -12,7 +12,7 @@ function App() {
   console.log("Cargando la aplicación");
 
   return (
-    <Router> 
+    <BrowserRouter> 
       <Navbar />
       <div className="container mt-4">
         <Routes>
@@ -22,7 +22,7 @@ function App() {
           <Route path="/game-room" element={<GameRoom />} />
         </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
