@@ -19,6 +19,7 @@ import './styles/styles.css';
 // const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function App() {
+  console.log('App cargando correctamente');
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   // const [loading, setLoading] = useState(true);
 
