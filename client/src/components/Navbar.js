@@ -5,14 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
-console.log('Backend URL:', BACKENDURL);
+console.log('Backend URL desde Navbar:', BACKENDURL);
 
 function NavbarComponent() {
+  console.log('Dentro de Navbar component1');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  console.log('Dentro de Navbar component');
+  console.log('Dentro de Navbar component2');
   // Comprobar autenticación
   useEffect(() => {
     console.log('Se ha entrado en useEffect');
@@ -36,6 +37,7 @@ function NavbarComponent() {
   // Función para cerrar sesión
   const handleLogout = async () => {
     try {
+      console.log('Dentro de handleLogout en Navbar');
       const response = await axios.get(BACKENDURL + '/api/auth/logout', {
         withCredentials: true,
       });
