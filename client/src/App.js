@@ -46,20 +46,21 @@ function App() {
 
   return (
     <Router>
-    {isLoading ? (
-      <LoadingSpinner />
-    ) : (
-      <>
-      <Navbar isAuthenticated={isAuthenticated} />
-      <div className="container mt-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/game-room" element={<GameRoom />} />
-        </Routes>
-      </div>
-  </>
+      {isLoading ? (
+        <LoadingSpinner />
+        ) : (
+          <>
+            <Navbar isAuthenticated={isAuthenticated} />
+            <div className="container mt-4">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/game-room" element={<GameRoom />} />
+            </Routes>
+            </div>
+          </>
+        )}
     </Router>
   );
 }
