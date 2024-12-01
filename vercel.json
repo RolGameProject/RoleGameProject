@@ -13,5 +13,5 @@
         "use": "@vercel/node"   
       }
     ],
-    "rewrites": [{ "source": "/(.*)", "destination": "/client" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/client/" }]
   }
