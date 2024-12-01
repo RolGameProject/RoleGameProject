@@ -68,31 +68,20 @@ function App() {
 
 
 
-  return (
-
-    <Router>
-
-      <Navbar />
-
-      <div className="container mt-4">
-
-        <Routes>
-
-          <Route path="/" element={<Home />} />
-
-          <Route path="/login" element={<Login />} />
-
-          <Route path="/dashboard" element={<Dashboard />} />
-
-          <Route path="/game-room" element={<GameRoom />} />
-
-        </Routes>
-
-      </div>
-
-    </Router>
-
-  );
+    return (
+    <>
+      <Navbar />
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/game-room" element={<GameRoom />} />
+        </Routes>
+      </div>
+    </>
+  );
+}
 
 }
 
