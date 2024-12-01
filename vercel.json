@@ -8,16 +8,14 @@
       {
         "src": "/server/api/index.js",
         "use": "@vercel/node"   
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",      
-        "dest": "/server/api/index.js" 
       },
-      {
-        "src": "/(.*)",         
-        "dest": "/client/$1"     
+      { 
+        "rewrites": [
+            { 
+                "source": "/(.*)",
+                "destination": "/" 
+            }
+        ] 
       }
     ]
   }
