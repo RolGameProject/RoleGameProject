@@ -117,34 +117,14 @@ app.use('/api/interaction', interactionRoutes);
 console.log('Ruta /api/interaction configurada');
 // app.use('/api/turns', turnRoutes); // Ruta para manejar los turnos
 
-// Función para iniciar el servidor
-const startServer = async () => {
-    console.log('Iniciando servidor...');
+// Exporta la app para que Vercel la gestione
+module.exports = async (req, res) => {
+    // Aquí iniciaremos la conexión a la base de datos solo cuando la función sea llamada
     await connectDB();
 
-    const server = app.listen(PORT, () => {
-        console.log(`Servidor escuchando en el puerto ${PORT}`);
-    });
-
-    const shutdown = async () => {
-        console.log('Cerrando servidor...');
-        if (mongoServer) {
-            console.log('Deteniendo MongoDB en memoria...');
-            await mongoServer.stop();
-        }
-        console.log('Cerrando conexión con MongoDB...');
-        await mongoose.connection.close();
-        console.log('Cerrando servidor Express...');
-        server.close(() => {
-            console.log('Servidor cerrado correctamente');
-        });
-    };
-
-    process.on('SIGINT', shutdown);
-    process.on('SIGTERM', shutdown);
+    // Maneja las peticiones como si fuera una función serverless
+    return app(req, res);
 };
-
-module.exports = app;
 
 // Si este archivo es ejecutado directamente (no importado), iniciamos el servidor
 if (require.main === module && process.env.NODE_ENV !== 'test') {
