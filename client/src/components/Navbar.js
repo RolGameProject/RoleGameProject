@@ -15,14 +15,14 @@ function NavbarComponent() {
   // Comprobar autenticación
   useEffect(() => {
     const checkAuth = async () => {
+    console.log('Verificando autenticación...');
       try {
         const response = await axios.get(BACKENDURL + '/api/auth/success', { withCredentials: true });
         console.log('Auth response:', response.data);
         setIsAuthenticated(response.data.authenticated);
-        setLoading(false);
       } catch (error) {
+        console.error('Error de autenticación:', error);
         setIsAuthenticated(false);
-        setLoading(false);
       } finally {
         setLoading(false); // Carga finalizada
       }
