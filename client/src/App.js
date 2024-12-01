@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar.js';
-// import axios from 'axios';
+import axios from 'axios';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -33,7 +33,7 @@ function App() {
         console.error('Error de autenticación:', error);
         setIsAuthenticated(false);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
     checkAuth();
@@ -46,7 +46,7 @@ function App() {
 
   return (
     <Router>
-      {isLoading ? (
+      {loading ? (
         <LoadingSpinner />
         ) : (
           <>
