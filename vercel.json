@@ -8,7 +8,7 @@
       {
         "src": "/server/api/index.js",
         "use": "@vercel/node"   
-      },]
+      }],
       "rewrites": [
         { 
           "source": "/(.*)",
