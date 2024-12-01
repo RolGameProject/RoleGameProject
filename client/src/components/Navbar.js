@@ -31,7 +31,7 @@ function NavbarComponent() {
       }
     };
     checkAuth();
-  }, [isAuthenticated]);
+  }, [loading]);
 
   // Función para cerrar sesión
   const handleLogout = async () => {
