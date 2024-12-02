@@ -16,15 +16,15 @@
   "routes": [
     {
       "src": "^/api/(.*)",      
-      "dest": "/server/api/$1"  // Rutas del backend, prioridad alta
+      "dest": "/server/api/$1"  
     },
     {
       "src": "^/(login|dashboard|game-room)(/.*)?", 
-      "dest": "/client/index.html" // Rutas del frontend específicas
+      "dest": "/client/index.html" 
     },
     {
       "src": "^/(.*)",         
-      "dest": "/client/index.html" // Cualquier otra ruta va al frontend
+      "dest": "/client/index.html" 
     }
   ]
 }
