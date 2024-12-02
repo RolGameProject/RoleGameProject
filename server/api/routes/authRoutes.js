@@ -43,7 +43,7 @@ router.get('/google/callback', (req, res, next) => {
 });
 
 // Ruta para obtener datos del usuario autenticado
-router.get('/user', async (req, res) => {
+router.get('/user', ensureAuthenticated, async (req, res) => {
     try {
         console.log('Solicitud a /user recibida');
         console.log('Sesión actual:', req.session);
