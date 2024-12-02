@@ -43,20 +43,26 @@ router.get('/google/callback', (req, res, next) => {
 });
 
 // Ruta para obtener datos del usuario autenticado
-router.get('/user', ensureAuthenticated, (req, res) => {
-    console.log('Solicitud a /user recibida');
-    console.log('Cabeceras:', req.headers);
-    console.log('Sesión actual:', req.session); // Verificar sesión
-    console.log('Cookie recibida:', req.headers.cookie); // Verificar cookies
-    console.log('Usuario autenticado:', req.user); // Verificar usuario
-    if (req.user) {
-        res.json({
-            userId: req.user._id,
-            displayName: req.user.displayName,
-            email: req.user.email
-        });
-    } else {
-        res.status(401).json({ message: 'Usuario no autenticado' });
+router.get('/user', ensureAuthenticated, async (req, res) => {
+    try {
+        console.log('Solicitud a /user recibida');
+        console.log('Sesión actual:', req.session);
+        console.log('Usuario autenticado:', req.user);
+
+        // Extraer datos del usuario desde req.user (Passport debería haberlo poblado)
+        if (req.user) {
+            const user = {
+                userId: req.user._id,
+                displayName: req.user.displayName,
+                email: req.user.email,
+            };
+            res.json(user);
+        } else {
+            res.status(401).json({ message: 'Usuario no autenticado' });
+        }
+    } catch (error) {
+        console.error('Error obteniendo datos del usuario:', error);
+        res.status(500).json({ message: 'Error del servidor' });
     }
 });
 
