@@ -1,26 +1,30 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "client/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-            "distDir": "build"
-        }
-      },
-      {
-        "src": "server/api/index.js",
-        "use": "@vercel/node"   
+  "version": 2,
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
       }
-    ],
-    "routes": [
-      {
-        "src": "^/api/(.*)",
-        "dest": "/server/api/$1" 
-      },
-      {
-        "src": "/(.*)",         
-        "dest": "/client/$1"     
-      }
-    ]
-  }
+    },
+    {
+      "src": "server/api/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "^/api/(.*)",      
+      "dest": "/server/api/$1"  // Rutas del backend, prioridad alta
+    },
+    {
+      "src": "^/(login|dashboard|game-room)(/.*)?", 
+      "dest": "/client/index.html" // Rutas del frontend específicas
+    },
+    {
+      "src": "^/(.*)",         
+      "dest": "/client/index.html" // Cualquier otra ruta va al frontend
+    }
+  ]
+}
