@@ -13,16 +13,15 @@
       "use": "@vercel/node"
     }
   ],
-  "redirects": [
+  "rewrites": [
     {
       "source": "/api/(.*)", 
-      "destination": "/api/$1"
-    }],
-  "rewrites": [
+      "destination": "server/api/$1"
+    },
     {
       "source": "/(.*)", 
       "destination": "/client/$1"
-    }
+    },
   ],
   "headers": [
     {
