@@ -15,12 +15,16 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)", 
-      "destination": "server/api/index.js"
+      "source": "/api/(.*)",      
+      "destination": "/server/api/index.js"
     },
     {
-      "source": "/(.*)", 
-      "destination": "/$1"
+      "source": "/(login|dashboard|game-room)(/.*)?",         
+      "destination": "/client/index.html"
+    },
+    {
+      "source": "/(.*)",         
+      "destination": "/client/$1"
     }
   ],
   "headers": [
