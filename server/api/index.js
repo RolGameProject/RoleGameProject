@@ -117,6 +117,18 @@ app.use('/api/interaction', interactionRoutes);
 console.log('Ruta /api/interaction configurada');
 // app.use('/api/turns', turnRoutes); // Ruta para manejar los turnos
 
+// Ruta de ejemplo para probar la sesión
+app.get('/test-session', (req, res) => {
+    console.log('Sesión actual en /test-session:', req.session);
+    if (req.session.user) {
+        console.log('Usuario autenticado:', req.session.user);
+        res.send('Sesión activa');
+    } else {
+        console.log('Usuario no autenticado');
+        res.send('Sesión no activa');
+    }
+});
+
 // Exporta la app para que Vercel la gestione
 module.exports = async (req, res) => {
     // Aquí iniciaremos la conexión a la base de datos solo cuando la función sea llamada
