@@ -22,7 +22,7 @@
   "rewrites": [
     {
       "source": "/(.*)", 
-      "destination": "/"
+      "destination": "/client/$1"
     }
   ],
   "headers": [
