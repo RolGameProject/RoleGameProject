@@ -11,7 +11,7 @@ const ensureAuthenticated = (req, res, next) => {
     }
 
     // Si el usuario está autenticado, permitimos el acceso
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() && req.user) {
         return next();
     }
     // Si no está autenticado, devolvemos un error 401 (no autorizado)
