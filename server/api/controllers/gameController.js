@@ -10,10 +10,6 @@ const ensureAuthenticated = (req, res, next) => {
     console.log('req.user:', req.user);
     console.log('req.session:', req.session);
     
-    app.use((req, res, next) => {
-        console.log('Sesión actual: ', req.session);  // Verifica que la sesión contiene el ID del usuario
-        next();
-    });
     // En modo de prueba, omitimos la verificación de autenticación
     if (process.env.NODE_ENV === 'test') {
         return next();
