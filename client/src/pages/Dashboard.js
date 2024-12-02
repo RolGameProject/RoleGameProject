@@ -59,6 +59,7 @@ function Dashboard({ isAuthenticated }) {
           setLoading(false);
           return;
         }
+        console.log('Usuario autenticado:', user);
   
         // Obtener personajes del usuario
         const charactersResponse = await getCharactersByUser();
@@ -83,6 +84,7 @@ function Dashboard({ isAuthenticated }) {
       } catch (err) {
         console.error('Error al cargar datos:', err);
         setError('Error al cargar datos.');
+      } finally  {
         setLoading(false);
       }
     };
