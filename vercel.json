@@ -15,15 +15,7 @@
     ],
   "rewrites": [
     {
-      "source": "/api/(.*)",      
-      "destination": "/server/api/index.js"  
-    },
-    {
-      "source": "/(login|dashboard|game-room)(/.*)?",         
-      "destination": "/client/index.html" 
-    },
-    {
-      "source": "/(.*)",         
+      "source": "/((?!api).*)",         
       "destination": "/client/$1" 
     }
   ]
