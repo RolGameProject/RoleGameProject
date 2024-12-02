@@ -15,11 +15,11 @@
   ],
   "routes": [
     {
-      "src": "^/api/(.*)",      
-      "dest": "/server/api/$1" 
+      "src": "/api/(.*)",      
+      "dest": "/server/api/index.js" 
     },
     {
-      "src": "^/(login|dashboard|game-room)(/.*)?", 
+      "src": "/(login|dashboard|game-room)(/.*)?", 
       "dest": "/client/$1"
     }
   ]
