@@ -13,20 +13,32 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "redirects": [
     {
-      "src": "/api/(.*)",      
-      "dest": "/server/api/index.js" 
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(login|dashboard|game-room)",         
-      "destination": "/client/index.html"
+      "source": "/api/(.*)", 
+      "destination": "/api/$1",
+      "statusCode": 200
     },
     {
       "source": "/(.*)", 
-      "destination": "/client/$1"
+      "destination": "/index.html",
+      "statusCode": 200
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)", 
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://role-game-project.vercel.app" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
     }
   ]
 }
