@@ -14,9 +14,9 @@ const ensureAuthenticated = (req, res, next) => {
         return next();
     }
 
-   if (req.session && req.session.passport && req.session.passport.user) {
+   if (req.session) {
         // Verificamos que el usuario existe en la base de datos
-        const user = await User.findById(req.session.passport.user);
+        const user = await User.findById(req.session);
         if (user) {
             req.user = user; // Adjuntamos el usuario a la solicitud
             return next();
