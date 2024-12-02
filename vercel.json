@@ -20,7 +20,7 @@
     },
     {
       "source": "/(login|dashboard|game-room)(/.*)?",         
-      "destination": "/client/$1" 
+      "destination": "/client/$1/$1" 
     },
     {
       "source": "/(.*)",         
