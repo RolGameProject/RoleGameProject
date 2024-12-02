@@ -17,6 +17,7 @@ const ensureAuthenticated = (req, res, next) => {
 
     // Verifica si la sesión existe y si contiene un usuario autenticado
     if (req.session && req.session.passport && req.session.passport.user) {
+        console.log('req.session.passport en gameController: ', req.session.passport);
         return next(); // Usuario autenticado, continúa
     }
 
