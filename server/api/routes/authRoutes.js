@@ -6,34 +6,50 @@ const { registerUser, deleteUser } = require('../controllers/userController');
 const router = express.Router();
 const { ensureAuthenticated } = require('../controllers/gameController');
 
-const FRONT_URL=process.env.REACT_APP_FRONTEND_URL;
+const FRONT_URL = process.env.REACT_APP_FRONTEND_URL;
+
 // Ruta para registrar un nuevo usuario
-router.post('/register', registerUser);
+router.post('/register', (req, res, next) => {
+    console.log('Registro de usuario solicitado. Datos del cuerpo:', req.body);
+    next();
+}, registerUser);
 
 // Ruta para eliminar un usuario
-router.delete('/delete/:id', deleteUser); // Aseguramos que el ID del usuario se pase como parámetro en la URL
+router.delete('/delete/:id', (req, res, next) => {
+    console.log('Eliminación de usuario solicitada para ID:', req.params.id);
+    next();
+}, deleteUser);
 
 // Ruta para iniciar sesión con Google
-router.get('/google', passport.authenticate('google', {
+router.get('/google', (req, res, next) => {
+    console.log('Inicio de sesión con Google solicitado');
+    console.log('Cookies actuales:', req.cookies); // Verificar cookies
+    next();
+}, passport.authenticate('google', {
     scope: ['profile', 'email'], // Solicitamos acceso al perfil y correo electrónico del usuario
     session: true
 }));
 
 // Ruta de callback de Google después de la autenticación
-router.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login', failureMessage: true }),
-    (req, res) => {
-        // Redirige al front-end tras la autenticación exitosa
-        res.redirect(FRONT_URL +'/dashboard');
-    }
-);
+router.get('/google/callback', (req, res, next) => {
+    console.log('Callback recibido de Google');
+    console.log('Headers:', req.headers); // Verificar las cabeceras
+    console.log('Cookies recibidas:', req.cookies); // Verificar las cookies
+    next();
+}, passport.authenticate('google', { failureRedirect: '/login', failureMessage: true }), (req, res) => {
+    console.log('Usuario autenticado en callback:', req.user); // Log del usuario autenticado
+    console.log('Sesión después de autenticación:', req.session); // Verificar la sesión activa
+    res.redirect(FRONT_URL + '/dashboard');
+});
 
+// Ruta para obtener datos del usuario autenticado
 router.get('/user', ensureAuthenticated, (req, res) => {
-    console.log('Cookie recibida', req.headers.cookie);
-    console.log('Sesión actual:', req.session);  // Muestra la sesión
-    console.log('Usuario autenticado:', req.user);  // Muestra el objeto del usuario
+    console.log('Solicitud a /user recibida');
+    console.log('Cabeceras:', req.headers);
+    console.log('Sesión actual:', req.session); // Verificar sesión
+    console.log('Cookie recibida:', req.headers.cookie); // Verificar cookies
+    console.log('Usuario autenticado:', req.user); // Verificar usuario
     if (req.user) {
-        // Devuelve la información del usuario autenticado
         res.json({
             userId: req.user._id,
             displayName: req.user.displayName,
@@ -46,6 +62,8 @@ router.get('/user', ensureAuthenticated, (req, res) => {
 
 // Ruta de éxito de autenticación
 router.get('/success', (req, res) => {
+    console.log('Solicitud a /success recibida');
+    console.log('Usuario autenticado:', req.user);
     if (req.isAuthenticated()) {
         res.status(200).json({ message: 'Inicio de sesión exitoso', authenticated: true, user: req.user });
     } else {
@@ -55,31 +73,37 @@ router.get('/success', (req, res) => {
 
 // Ruta de fallo de autenticación
 router.get('/failure', (req, res) => {
+    console.log('Fallo de autenticación detectado');
     res.status(401).json({ message: 'Fallo en la autenticación' });
 });
 
-// Ruta para verificar si el usuario está autenticado
+// Ruta para verificar el estado de autenticación del usuario
 router.get('/status', (req, res) => {
+    console.log('Verificación de estado de autenticación');
+    console.log('Usuario autenticado:', req.user);
     if (req.isAuthenticated()) {
-        res.json({ isAuthenticated: true, user: req.user }); // Devuelve true si está autenticado
+        res.json({ isAuthenticated: true, user: req.user });
     } else {
-        res.json({ isAuthenticated: false }); // Devuelve false si no lo está
+        res.json({ isAuthenticated: false });
     }
 });
 
 // Ruta para cerrar sesión
 router.get('/logout', (req, res) => {
+    console.log('Solicitud de cierre de sesión recibida');
+    console.log('Sesión antes de cerrar:', req.session);
     req.logout((err) => {
         if (err) {
+            console.error('Error al cerrar sesión:', err);
             return res.status(500).json({ message: 'Error al cerrar sesión' });
         }
-        // Destruir la sesión y limpiar la cookie
         req.session.destroy(() => {
+            console.log('Sesión destruida con éxito');
             res.clearCookie('connect.sid'); // Limpia la cookie de sesión
+            console.log('Cookies después de limpiar:', req.cookies);
             res.status(200).json({ message: 'Sesión cerrada con éxito' });
         });
     });
 });
-
 
 module.exports = router;
