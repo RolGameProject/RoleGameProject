@@ -13,16 +13,20 @@ const createSHA256Hash = (data) => {
 // Serialización del usuario para almacenar solo su ID en la sesión
 
 passport.serializeUser((user, done) => {
+    console.log('Serializando usuario: ', 
     done(null, user.id);
 });
 
 // Deserialización del usuario utilizando el ID almacenado en la sesión
 
 passport.deserializeUser(async (id, done) => {
+    console.log('Deserializando usuario con ID:', id);
     try {
         const user = await User.findById(id); // Busca el usuario en la base de datos usando su ID
+        console.log('Usuario encontrado al deserializar:', user);
         done(null, user); // Si lo encuentra, lo retorna
     } catch (error) {
+        console.error('Error al deserializar usuario:', error);
         done(error, null); // En caso de error, pasa el error
     }
 });
@@ -33,6 +37,7 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Secreto del cliente de Google
     callbackURL: process.env.GOOGLE_CALLBACK_URL, // URL de redirección después de autenticarse en Google
 }, async (accessToken, refreshToken, profile, done) => { // Función para manejar el flujo después de autenticarse
+    console.log('Datos recibidos de Google:', { accessToken, profile });
     
     try {
         // Hasheamos los datos sensibles antes de almacenarlos
@@ -43,6 +48,7 @@ passport.use(new GoogleStrategy({
         // Buscamos si el usuario ya existe en la base de datos mediante el googleId hasheado
         const existingUser = await User.findOne({ googleId: hashedGoogleId });
         if (existingUser) {
+            console.log('existingUser en passportConfig: ', existingUser);
             return done(null, existingUser); // Si el usuario existe, lo devuelve para iniciar sesión
         }
 
@@ -52,6 +58,7 @@ passport.use(new GoogleStrategy({
             displayName: hashedDisplayName,
             email: hashedEmail, // El email también se guarda como un hash
         }).save();
+        console.log('Nuevo usuario creado:', newUser);
         done(null, newUser); // Devolvemos el nuevo usuario
     } catch (error) {
         console.error('Error al autenticar:', error);
