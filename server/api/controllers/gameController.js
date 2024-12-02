@@ -5,12 +5,16 @@ const { Character } = require('../models/characterModel');
 
 // Middleware de autenticación
 const ensureAuthenticated = (req, res, next) => {
+    console.log('Revisando autenticación...');
+    console.log('req.isAuthenticated:', req.isAuthenticated());
+    console.log('req.user:', req.user);
+    console.log('req.session:', req.session);
     // En modo de prueba, omitimos la verificación de autenticación
     if (process.env.NODE_ENV === 'test') {
         return next();
     }
 
-   if (req.isAuthenticated() || req.user ) {
+   if (req.isAuthenticated() && req.user ) {
         return next();
     } else {
         console.log('Usuario no autenticado o sesión inválida.');
