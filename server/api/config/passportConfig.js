@@ -14,7 +14,7 @@ const createSHA256Hash = (data) => {
 
 passport.serializeUser((user, done) => {
     console.log('Serializando usuario: ', user);
-    done(null, user.id);
+    done(null, user._id);
 });
 
 // Deserialización del usuario utilizando el ID almacenado en la sesión
