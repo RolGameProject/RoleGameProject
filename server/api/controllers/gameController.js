@@ -9,17 +9,19 @@ const ensureAuthenticated = (req, res, next) => {
     console.log('req.isAuthenticated:', req.isAuthenticated());
     console.log('req.user:', req.user);
     console.log('req.session:', req.session);
+
     // En modo de prueba, omitimos la verificación de autenticación
     if (process.env.NODE_ENV === 'test') {
         return next();
     }
 
-   if (req.session ) {
-        return next();
-    } else {
-        console.log('Usuario no autenticado o sesión inválida.');
-        res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
-   }
+    // Verifica si la sesión existe y si contiene un usuario autenticado
+    if (req.session && req.session.passport && req.session.passport.user) {
+        return next(); // Usuario autenticado, continúa
+    }
+
+    console.log('Usuario no autenticado o sesión inválida.');
+    res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
 };
 
 // Método para obtener todas las partidas guardadas
