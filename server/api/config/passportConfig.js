@@ -37,7 +37,7 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Secreto del cliente de Google
     callbackURL: process.env.GOOGLE_CALLBACK_URL, // URL de redirección después de autenticarse en Google
 }, async (accessToken, refreshToken, profile, done) => { // Función para manejar el flujo después de autenticarse
-    console.log('Datos recibidos de Google:', { accessToken, profile });
+    console.log('Datos recibidos de Google:', { profile });
     
     try {
         // Hasheamos los datos sensibles antes de almacenarlos
