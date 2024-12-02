@@ -13,14 +13,14 @@
         "use": "@vercel/node"   
       }
     ],
-    "routes": [
-      {
-        "src": "/api/(.*)",      
-        "dest": "/server/api/index.js" 
-      },
-      {
-        "src": "/(.*)",         
-        "dest": "/client/$1"     
-      }
+  "routes": [
+    {
+      "src": "^/api/(.*)",      
+      "dest": "/api/$1"         // Redirige correctamente a la función serverless exportada
+    },
+    {
+      "src": "/(.*)",         
+      "dest": "/client/$1"      // Rutas del frontend
+    }
     ]
   }
