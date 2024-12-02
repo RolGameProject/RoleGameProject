@@ -13,14 +13,18 @@
       "use": "@vercel/node"
     }
   ],
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/server/api/index.js"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/client/$1"
-      }
-    ]
+  "rewrites": [
+    {
+      "source": "/api/(.*)",      
+      "destination": "/server/api/index.js"
+    },
+    {
+      "source": "/(login|dashboard|game-room)(/.*)?",         
+      "destination": "/client/index.html"
+    },
+    {
+      "source": "/(.*)",         
+      "destination": "/client/$1"
+    }
+  ]
 }
