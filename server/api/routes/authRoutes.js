@@ -29,6 +29,7 @@ router.get('/google/callback',
 );
 
 router.get('/user', ensureAuthenticated, (req, res) => {
+    console.log('Cookie recibida', req.headers.cookie);
     console.log('Sesión actual:', req.session);  // Muestra la sesión
     console.log('Usuario autenticado:', req.user);  // Muestra el objeto del usuario
     if (req.user) {
