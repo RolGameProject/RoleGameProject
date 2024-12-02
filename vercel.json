@@ -21,6 +21,10 @@
     {
       "src": "^/(login|dashboard|game-room)(/.*)?", 
       "dest": "/client/index.html"
+    },
+    {
+      "src": "^/.*", 
+      "dest": "/client/index.html"
     }
   ]
 }
