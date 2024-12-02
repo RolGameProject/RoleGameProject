@@ -21,7 +21,7 @@
     },
     {
       "source": "/(.*)", 
-      "destination": "/client/index.html"
+      "destination": "/"
     }
   ],
   "headers": [
