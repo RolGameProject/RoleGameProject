@@ -21,6 +21,10 @@
   ],
   "rewrites": [
     {
+      "source": "/(login|dashboard|game-room)(/.*)?",         
+      "destination": "/client/index.html"
+    },
+    {
       "source": "/(.*)", 
       "destination": "/client/$1"
     }
