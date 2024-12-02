@@ -19,8 +19,11 @@
       "destination": "/server/api/index.js"  
     },
     {
+      "source": "/(login|dashboard|game-room)(/.*)?",         
+      "destination": "/client/index.html" ,
+    {
       "source": "/(.*)",         
-      "destination": "/client/index.html" 
+      "destination": "/client/$1" 
     }
   ]
   }
