@@ -13,14 +13,14 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
-    {
-      "src": "/api/(.*)",      
-      "dest": "/server/api/index.js" 
-    },
-    {
-      "src": "/(login|dashboard|game-room)(/.*)?", 
-      "dest": "/client/$1"
-    }
-  ]
-}
+    "routes": [
+      {
+        "src": "/api/(.*)",      
+        "dest": "/server/api/index.js" 
+      },
+      {
+        "src": "/(.*)",         
+        "dest": "/client/$1"     
+      }
+    ]
+  }
