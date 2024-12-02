@@ -14,7 +14,7 @@ const ensureAuthenticated = (req, res, next) => {
         return next();
     }
 
-   if (req.isAuthenticated() && req.user ) {
+   if (req.isAuthenticated() && req.session ) {
         return next();
     } else {
         console.log('Usuario no autenticado o sesión inválida.');
