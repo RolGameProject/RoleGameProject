@@ -21,7 +21,7 @@
     },
     {
       "source": "/(.*)", 
-      "destination": "/client/index.html",
+      "destination": "/client/$1",
       "statusCode": 200
     }
   ],
