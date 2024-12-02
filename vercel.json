@@ -19,7 +19,7 @@
       "destination": "/api/$1",
       "statusCode": 200
     }],
-  "rewrite": [
+  "rewrites": [
     {
       "source": "/(.*)", 
       "destination": "/"
