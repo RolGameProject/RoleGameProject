@@ -32,6 +32,8 @@ router.get('/google', (req, res, next) => {
 
 // Ruta de callback de Google después de la autenticación
 router.get('/google/callback', (req, res, next) => {
+    // Verifica si la conexión a MongoDB sigue activa
+    console.log('Estado de la conexión MongoDB:', mongoose.connection.readyState);
     console.log('Callback recibido de Google');
     console.log('Headers:', req.headers); // Verificar las cabeceras
     console.log('Cookies recibidas:', req.cookies); // Verificar las cookies
@@ -40,6 +42,8 @@ router.get('/google/callback', (req, res, next) => {
     console.log('Usuario autenticado en callback:', req.user); // Log del usuario autenticado
     console.log('Sesión después de autenticación:', req.session); // Verificar la sesión activa
     res.redirect(FRONT_URL + '/dashboard');
+    // Verifica si la conexión a MongoDB sigue activa
+    console.log('Estado de la conexión MongoDB:', mongoose.connection.readyState);
 });
 
 // Ruta para obtener datos del usuario autenticado
