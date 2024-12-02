@@ -19,6 +19,7 @@ const ensureAuthenticated = (req, res, next) => {
     } else {
         console.log('Usuario no autenticado o sesión inválida.');
         res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
+   }
 };
 
 // Método para obtener todas las partidas guardadas
