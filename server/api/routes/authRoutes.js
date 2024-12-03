@@ -84,7 +84,7 @@ router.get('/success', (req, res) => {
         res.status(200).json({ message: 'Inicio de sesión exitoso', authenticated: true, user: req.user });
     // } else {
         // res.status(401).json({ authenticated: false, message: 'Usuario no autenticado' });
-    }
+    // }
 });
 
 // Ruta de fallo de autenticación
