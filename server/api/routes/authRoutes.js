@@ -157,15 +157,52 @@ router.get('/failure', (req, res) => {
 });
 
 // Ruta para verificar el estado de autenticación del usuario
-router.get('/status', (req, res) => {
-    console.log('Verificación de estado de autenticación');
-    console.log('Usuario autenticado:', req.user);
-    if (req.isAuthenticated()) {
-        res.json({ isAuthenticated: true, user: req.user });
-    } else {
+
+router.get('/status', async (req, res) => {
+    console.log('Verificación de estado de autenticación basada en cookies...');
+    
+    const userCookie = req.cookies.user;
+
+    if (!userCookie) {
+        console.log('No se encontró la cookie de usuario.');
+        return res.json({ isAuthenticated: false });
+    }
+
+    try {
+        // Decodificar y parsear la cookie
+        const decodedUser = JSON.parse(decodeURIComponent(userCookie));
+        console.log('Usuario decodificado desde la cookie:', decodedUser);
+
+        // Validar si existe el ID del usuario
+        if (!decodedUser.id) {
+            console.log('Cookie inválida: no contiene ID de usuario.');
+            return res.json({ isAuthenticated: false });
+        }
+
+        // Consultar en la base de datos para verificar la existencia del usuario
+        const user = await User.findById(decodedUser.id);
+        if (!user) {
+            console.log('Usuario no encontrado en la base de datos.');
+            return res.json({ isAuthenticated: false });
+        }
+
+        console.log('Usuario autenticado:', user);
+        res.json({ isAuthenticated: true, user });
+    } catch (error) {
+        console.error('Error al procesar la cookie de usuario:', error);
         res.json({ isAuthenticated: false });
     }
 });
+
+// router.get('/status', (req, res) => {
+//     console.log('Verificación de estado de autenticación');
+//     console.log('Usuario autenticado:', req.user);
+//     if (req.isAuthenticated()) {
+//         res.json({ isAuthenticated: true, user: req.user });
+//     } else {
+//         res.json({ isAuthenticated: false });
+//     }
+// });
 
 router.get('/logout', (req, res) => {
     console.log('Solicitud de cierre de sesión recibida');
