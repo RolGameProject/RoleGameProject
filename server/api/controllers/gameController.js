@@ -4,7 +4,7 @@ const discordClient = require('../discordClient'); // Importamos el cliente de D
 const { Character } = require('../models/characterModel');
 
 // Middleware de autenticación
-const ensureAuthenticated = (req, res, next) => {
+const ensureAuthenticated = async (req, res, next) => {
     // console.log('Revisando autenticación...');
     // console.log('req.isAuthenticated:', req.isAuthenticated());
     // console.log('req.user:', req.user);
