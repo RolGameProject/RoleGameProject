@@ -1,6 +1,6 @@
 // Archivo de configuración BACKEND principal
 const express = require('express');
-// const session = require('express-session');
+const session = require('express-session');
 // const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -70,7 +70,7 @@ console.log('Express configurado para JSON y formularios');
 
 // Inicializamos Passport
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 console.log('Passport inicializado');
 
 // Función para conectar con la base de datos
