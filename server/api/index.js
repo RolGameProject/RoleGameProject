@@ -69,7 +69,7 @@ app.use(express.urlencoded({ extended: true }));
 console.log('Express configurado para JSON y formularios');
 
 // Inicializamos Passport
-// app.use(passport.initialize());
+app.use(passport.initialize());
 // app.use(passport.session());
 console.log('Passport inicializado');
 
