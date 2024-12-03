@@ -47,7 +47,8 @@ app.use(session({
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
         maxAge: 1000 * 60 * 60, // 1 hora de duración
-        sameSite: 'None'
+        sameSite: 'None',
+        domain: 'https://role-game-project.vercel.app/'
     },
     store: process.env.NODE_ENV === 'production'
         ? MongoStore.create({
