@@ -1,7 +1,7 @@
 // Archivo de configuración BACKEND principal
 const express = require('express');
 const session = require('express-session');
-// const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -14,7 +14,6 @@ const passport = require('passport');
 require('./config/passportConfig');
 const authRoutes = require('./routes/authRoutes');
 const characterRoutes = require('./routes/characterRoutes');
-// const cookieParser = require('cookie-parser');
 
 const FRONTEND = process.env.REACT_APP_FRONTEND_URL;
 
@@ -40,28 +39,25 @@ app.use(cors({
 console.log('CORS configurado con origen:', FRONTEND);
 
 // Configurar sesión para almacenar la sesión del usuario
-// app.use(session({
-//     secret: process.env.SESSION_SECRET || 'mi_secreto_super_seguro',
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//         secure: process.env.NODE_ENV === 'production',
-//         httpOnly: true,
-//         maxAge: 1000 * 60 * 60, // 1 hora de duración
-//         sameSite: 'None',
-//         domain: 'https://role-game-project.vercel.app/'
-//     },
-//     store: process.env.NODE_ENV === 'production'
-//         ? MongoStore.create({
-//             mongoUrl: process.env.MONGODB_URI,
-//             collectionName: 'sessions'
-//         })
-//         : undefined
-// }));
-// console.log('Sesión configurada correctamente');
-
-// Usamos cookie-parser para manejar las cookies
-// app.use(cookieParser());
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'mi_secreto_super_seguro',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60, // 1 hora de duración
+        sameSite: 'None',
+        domain: 'https://role-game-project.vercel.app/'
+    },
+    store: process.env.NODE_ENV === 'production'
+        ? MongoStore.create({
+            mongoUrl: process.env.MONGODB_URI,
+            collectionName: 'sessions'
+        })
+        : undefined
+}));
+console.log('Sesión configurada correctamente');
 
 // Configuramos Express para que acepte JSON y formularios codificados
 app.use(express.json());
@@ -123,16 +119,16 @@ console.log('Ruta /api/interaction configurada');
 // app.use('/api/turns', turnRoutes); // Ruta para manejar los turnos
 
 // Ruta de ejemplo para probar la sesión
-// app.get('/test-session', (req, res) => {
-//     console.log('Sesión actual en /test-session:', req.session);
-//     if (req.session.user) {
-//         console.log('Usuario autenticado:', req.session.user);
-//         res.send('Sesión activa');
-//     } else {
-//         console.log('Usuario no autenticado');
-//         res.send('Sesión no activa');
-//     }
-// });
+app.get('/test-session', (req, res) => {
+    console.log('Sesión actual en /test-session:', req.session);
+    if (req.session.user) {
+        console.log('Usuario autenticado:', req.session.user);
+        res.send('Sesión activa');
+    } else {
+        console.log('Usuario no autenticado');
+        res.send('Sesión no activa');
+    }
+});
 
 // Exporta la app para que Vercel la gestione
 module.exports = async (req, res) => {
