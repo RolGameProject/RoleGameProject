@@ -21,7 +21,7 @@ function NavbarComponent() {
       }
     };
 
-    const timeoutId = setTimeout() => {
+    const timeoutId = setTimeout(() => {
     checkAuth();
     }, 500);
   return () => clearTimeout(timeoutId);
