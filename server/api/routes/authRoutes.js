@@ -64,7 +64,14 @@ router.get('/google/callback',
             displayName: req.user.displayName,
             email: req.user.email,
         };
+
+        console.log'userData en authRoutes callback:', req.user._id);
+        console.log'userData en authRoutes callback:', req.user.displayName);
+        console.log'userData en authRoutes callback:', req.user.email);
+        
         res.cookie('user', JSON.stringify(userData), cookieOptions);
+
+        console.log('res.cookies en callback: ', res.cookies);
 
         // Redirigir al frontend
         res.redirect(FRONT_URL + '/dashboard');
