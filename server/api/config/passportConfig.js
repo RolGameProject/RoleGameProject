@@ -11,7 +11,7 @@ const createSHA256Hash = (data) => {
     return crypto.createHash('sha256').update(data).digest('hex');
 };
 
-Serialización del usuario para almacenar solo su ID en la sesión
+// Serialización del usuario para almacenar solo su ID en la sesión
 
 passport.serializeUser((user, done) => {
     console.log('Serializando usuario: ', user);
