@@ -34,7 +34,8 @@ const cookieOptions = {
     httpOnly: true, // Las cookies no se pueden acceder desde el cliente mediante JavaScript
     secure: process.env.NODE_ENV === 'production', // Cookies solo se envían por HTTPS en producción
     sameSite: 'None', // Permitir cross-origin cookies (importante para Vercel)
-    maxAge: 24 * 60 * 60 * 1000 // Expiración de la cookie: 1 día
+    maxAge: 24 * 60 * 60 * 1000, // Expiración de la cookie: 1 día
+    domain: 'https://role-game-project.vercel.app/'
 };
 
 // Ruta de callback de Google después de la autenticación
