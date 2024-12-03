@@ -3,7 +3,6 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const crypto = require('crypto'); // Importamos el módulo para crear hashes SHA256
 const User = require('../models/userModel'); // Modelo de usuario para interactuar con la base de datos
-const session = require('express-session');
 
 // Función para generar un hash SHA256 a partir de un dato sensible
 // Esta función se utiliza para proteger la información de usuario en la base de datos
