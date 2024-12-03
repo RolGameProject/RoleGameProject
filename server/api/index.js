@@ -14,6 +14,7 @@ const passport = require('passport');
 require('./config/passportConfig');
 const authRoutes = require('./routes/authRoutes');
 const characterRoutes = require('./routes/characterRoutes');
+// const cookieParser = require('cookie-parser');
 
 const FRONTEND = process.env.REACT_APP_FRONTEND_URL;
 
@@ -39,25 +40,25 @@ app.use(cors({
 console.log('CORS configurado con origen:', FRONTEND);
 
 // Configurar sesión para almacenar la sesión del usuario
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'mi_secreto_super_seguro',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60, // 1 hora de duración
-        sameSite: 'None',
-        domain: 'https://role-game-project.vercel.app/'
-    },
-    store: process.env.NODE_ENV === 'production'
-        ? MongoStore.create({
-            mongoUrl: process.env.MONGODB_URI,
-            collectionName: 'sessions'
-        })
-        : undefined
-}));
-console.log('Sesión configurada correctamente');
+// app.use(session({
+//     secret: process.env.SESSION_SECRET || 'mi_secreto_super_seguro',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         secure: process.env.NODE_ENV === 'production',
+//         httpOnly: true,
+//         maxAge: 1000 * 60 * 60, // 1 hora de duración
+//         sameSite: 'None',
+//         domain: 'https://role-game-project.vercel.app/'
+//     },
+//     store: process.env.NODE_ENV === 'production'
+//         ? MongoStore.create({
+//             mongoUrl: process.env.MONGODB_URI,
+//             collectionName: 'sessions'
+//         })
+//         : undefined
+// }));
+// console.log('Sesión configurada correctamente');
 
 // Configuramos Express para que acepte JSON y formularios codificados
 app.use(express.json());
