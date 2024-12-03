@@ -4,59 +4,26 @@ const discordClient = require('../discordClient'); // Importamos el cliente de D
 const { Character } = require('../models/characterModel');
 
 // Middleware de autenticación
-
-const ensureAuthenticated = async (req, res, next) => {
-    const userCookie = req.cookies.user;
+const ensureAuthenticated = (req, res, next) => {
+    console.log('Revisando autenticación...');
+    console.log('req.isAuthenticated:', req.isAuthenticated());
+    console.log('req.user:', req.user);
+    console.log('req.session:', req.session);
     
-    if (!userCookie) {
-        return res.status(401).json({ error: "No estás autenticado." });
+    // En modo de prueba, omitimos la verificación de autenticación
+    if (process.env.NODE_ENV === 'test') {
+        return next();
     }
-    
-//     req.user = JSON.parse(userCookie);
-//     next();
-// };
 
-  try {
-        const userData = JSON.parse(userCookie);
-        const user = await User.findById(userData.id);
-        
-        // if (!user) {
-        //     return res.redirect('/login'); // Redirige si el usuario no existe en la base de datos
-        // }
-      
-        if (!user) {
-            return res.status(401).json({ error: "Usuario no encontrado." });
-        }
-
-        // Si el usuario es válido, lo agregamos a la solicitud
-        req.user = user;
-        next();
-    } catch (error) {
-        console.error('Error al verificar el usuario:', error);
-        return res.redirect('/login');
+    console.log('req.session.passport en gameController: ', req.session.passport);
+    // Verifica si la sesión existe y si contiene un usuario autenticado
+    if (req.session && req.session.passport && req.session.passport.user) {
+        return next(); // Usuario autenticado, continúa
     }
+
+    console.log('Usuario no autenticado o sesión inválida.');
+    res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
 };
-    
-// const ensureAuthenticated = (req, res, next) => {
-//     console.log('Revisando autenticación...');
-//     console.log('req.isAuthenticated:', req.isAuthenticated());
-//     console.log('req.user:', req.user);
-//     console.log('req.session:', req.session);
-    
-//     // En modo de prueba, omitimos la verificación de autenticación
-//     if (process.env.NODE_ENV === 'test') {
-//         return next();
-//     }
-
-//     console.log('req.session.passport en gameController: ', req.session.passport);
-//     // Verifica si la sesión existe y si contiene un usuario autenticado
-//     if (req.session && req.session.passport && req.session.passport.user) {
-//         return next(); // Usuario autenticado, continúa
-//     }
-
-//     console.log('Usuario no autenticado o sesión inválida.');
-//     res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
-// };
 
 // Método para obtener todas las partidas guardadas
 const getAllGames = async (req, res) => {
