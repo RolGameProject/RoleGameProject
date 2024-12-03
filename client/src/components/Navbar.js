@@ -7,7 +7,7 @@ import axios from 'axios';
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function NavbarComponent() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   // Comprobar autenticación
@@ -21,10 +21,8 @@ function NavbarComponent() {
       }
     };
 
-    const timeoutId = setTimeout(() => {
     checkAuth();
-    }, 1000);
-  return () => clearTimeout(timeoutId);
+
   }, []);
 
   // Función para cerrar sesión
