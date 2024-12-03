@@ -2,7 +2,7 @@
 import axios from 'axios';
 // import { user } from '../../../server/discordClient';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL + '/api/characters'; // Reemplaza con tu URL de la API
+const API_URL = process.env.REACT_APP_BACKEND_URL + '/api'; // Reemplaza con tu URL de la API
 
 // Obtener todos los personajes
 export const getAllCharacters = async () => {
