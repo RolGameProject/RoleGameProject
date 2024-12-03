@@ -23,7 +23,7 @@ function NavbarComponent() {
 
     const timeoutId = setTimeout(() => {
     checkAuth();
-    }, 500);
+    }, 1000);
   return () => clearTimeout(timeoutId);
   }, []);
 
