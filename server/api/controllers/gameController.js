@@ -20,8 +20,12 @@ const ensureAuthenticated = async (req, res, next) => {
         const userData = JSON.parse(userCookie);
         const user = await User.findById(userData.id);
         
+        // if (!user) {
+        //     return res.redirect('/login'); // Redirige si el usuario no existe en la base de datos
+        // }
+      
         if (!user) {
-            return res.redirect('/login'); // Redirige si el usuario no existe en la base de datos
+            return res.status(401).json({ error: "Usuario no encontrado." });
         }
 
         // Si el usuario es válido, lo agregamos a la solicitud
