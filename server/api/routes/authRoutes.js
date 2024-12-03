@@ -71,7 +71,7 @@ router.get('/google/callback',
         
         res.cookie('user', JSON.stringify(userData), cookieOptions);
 
-        console.log('res.cookies en callback: ', res.cookies);
+        console.log('res.cookies en callback: ', res.cookie);
 
         // Redirigir al frontend
         res.redirect(FRONT_URL + '/dashboard');
