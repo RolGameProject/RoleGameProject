@@ -20,7 +20,11 @@ function NavbarComponent() {
         setIsAuthenticated(false);
       }
     };
+
+    const timeoutId = setTimeout() => {
     checkAuth();
+    }, 500);
+  return () => clearTimeout(timeoutId);
   }, []);
 
   // Función para cerrar sesión
