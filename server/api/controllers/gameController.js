@@ -5,7 +5,7 @@ const { Character } = require('../models/characterModel');
 
 // Middleware de autenticación
 
-ensureAuthenticated = (req, res, next) => {
+const ensureAuthenticated = async (req, res, next) => {
     const userCookie = req.cookies.user;
     
     if (!userCookie) {
