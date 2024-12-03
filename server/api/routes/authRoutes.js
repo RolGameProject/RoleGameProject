@@ -65,9 +65,9 @@ router.get('/google/callback',
             email: req.user.email,
         };
 
-        console.log'userData en authRoutes callback:', req.user._id);
-        console.log'userData en authRoutes callback:', req.user.displayName);
-        console.log'userData en authRoutes callback:', req.user.email);
+        console.log('userData en authRoutes callback:', req.user._id);
+        console.log('userData en authRoutes callback:', req.user.displayName);
+        console.log('userData en authRoutes callback:', req.user.email);
         
         res.cookie('user', JSON.stringify(userData), cookieOptions);
 
