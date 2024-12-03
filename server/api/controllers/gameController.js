@@ -12,10 +12,27 @@ ensureAuthenticated = (req, res, next) => {
         return res.status(401).json({ error: "No estás autenticado." });
     }
     
-    req.user = JSON.parse(userCookie);
-    next();
-};
+//     req.user = JSON.parse(userCookie);
+//     next();
+// };
 
+  try {
+        const userData = JSON.parse(userCookie);
+        const user = await User.findById(userData.id);
+        
+        if (!user) {
+            return res.redirect('/login'); // Redirige si el usuario no existe en la base de datos
+        }
+
+        // Si el usuario es válido, lo agregamos a la solicitud
+        req.user = user;
+        next();
+    } catch (error) {
+        console.error('Error al verificar el usuario:', error);
+        return res.redirect('/login');
+    }
+};
+    
 // const ensureAuthenticated = (req, res, next) => {
 //     console.log('Revisando autenticación...');
 //     console.log('req.isAuthenticated:', req.isAuthenticated());
