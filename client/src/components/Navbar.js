@@ -7,7 +7,7 @@ import axios from 'axios';
 const BACKENDURL=process.env.REACT_APP_BACKEND_URL;
 
 function NavbarComponent() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const navigate = useNavigate();
 
   // Comprobar autenticación
