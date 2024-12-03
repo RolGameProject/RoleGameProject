@@ -11,27 +11,27 @@ const createSHA256Hash = (data) => {
     return crypto.createHash('sha256').update(data).digest('hex');
 };
 
-// Serialización del usuario para almacenar solo su ID en la sesión
+Serialización del usuario para almacenar solo su ID en la sesión
 
-// passport.serializeUser((user, done) => {
-//     console.log('Serializando usuario: ', user);
-//     console.log('ID del usuario: ', user._id);
-//     done(null, user._id);
-// });
+passport.serializeUser((user, done) => {
+    console.log('Serializando usuario: ', user);
+    console.log('ID del usuario: ', user._id);
+    done(null, user._id);
+});
 
-// // Deserialización del usuario utilizando el ID almacenado en la sesión
+// Deserialización del usuario utilizando el ID almacenado en la sesión
 
-// passport.deserializeUser(async (_id, done) => {
-//     console.log('Deserializando usuario con ID:', _id);
-//     try {
-//         const user = await User.findById(_id); // Busca el usuario en la base de datos usando su ID
-//         console.log('Usuario encontrado al deserializar:', user);
-//         done(null, user); // Si lo encuentra, lo retorna
-//     } catch (error) {
-//         console.error('Error al deserializar usuario:', error);
-//         done(error, null); // En caso de error, pasa el error
-//     }
-// });
+passport.deserializeUser(async (_id, done) => {
+    console.log('Deserializando usuario con ID:', _id);
+    try {
+        const user = await User.findById(_id); // Busca el usuario en la base de datos usando su ID
+        console.log('Usuario encontrado al deserializar:', user);
+        done(null, user); // Si lo encuentra, lo retorna
+    } catch (error) {
+        console.error('Error al deserializar usuario:', error);
+        done(error, null); // En caso de error, pasa el error
+    }
+});
 
 // Configuración de la estrategia de autenticación de Google
 passport.use(new GoogleStrategy({
