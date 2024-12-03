@@ -80,10 +80,10 @@ router.get('/success', (req, res) => {
     console.log('Solicitud a /success recibida');
     console.log('Usuario autenticado:', req.user);
     console.log('Req en success: ', req);
-    if (req.isAuthenticated()) {
+    // if (req.isAuthenticated()) {
         res.status(200).json({ message: 'Inicio de sesión exitoso', authenticated: true, user: req.user });
-    } else {
-        res.status(401).json({ authenticated: false, message: 'Usuario no autenticado' });
+    // } else {
+        // res.status(401).json({ authenticated: false, message: 'Usuario no autenticado' });
     }
 });
 
