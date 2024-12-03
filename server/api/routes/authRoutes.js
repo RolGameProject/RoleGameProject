@@ -5,6 +5,7 @@ const passport = require('passport');
 const { registerUser, deleteUser } = require('../controllers/userController');
 const router = express.Router();
 const { ensureAuthenticated } = require('../controllers/gameController');
+const User = require('../models/userModel');
 
 const FRONT_URL = process.env.REACT_APP_FRONTEND_URL;
 
