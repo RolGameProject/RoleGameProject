@@ -14,7 +14,7 @@ const passport = require('passport');
 require('./config/passportConfig');
 const authRoutes = require('./routes/authRoutes');
 const characterRoutes = require('./routes/characterRoutes');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 
 const FRONTEND = process.env.REACT_APP_FRONTEND_URL;
 
@@ -59,6 +59,9 @@ console.log('CORS configurado con origen:', FRONTEND);
 //         : undefined
 // }));
 // console.log('Sesión configurada correctamente');
+
+// Usamos cookie-parser para manejar las cookies
+app.use(cookieParser());
 
 // Configuramos Express para que acepte JSON y formularios codificados
 app.use(express.json());
