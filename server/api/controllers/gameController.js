@@ -5,25 +5,63 @@ const { Character } = require('../models/characterModel');
 
 // Middleware de autenticación
 const ensureAuthenticated = (req, res, next) => {
-    console.log('Revisando autenticación...');
-    console.log('req.isAuthenticated:', req.isAuthenticated());
-    console.log('req.user:', req.user);
-    console.log('req.session:', req.session);
+    // console.log('Revisando autenticación...');
+    // console.log('req.isAuthenticated:', req.isAuthenticated());
+    // console.log('req.user:', req.user);
+    // console.log('req.session:', req.session);
+
+    console.log('Revisando autenticación basada en cookies...');
+
+    const userCookie = req.cookies.user;
+
+    if (!userCookie) {
+        console.log('No se encontró la cookie de usuario.');
+        return res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
+    }
+
+    try {
+        // Decodificar la cookie (URL decoding y JSON parsing)
+        const decodedUser = JSON.parse(decodeURIComponent(userCookie));
+        console.log('Usuario decodificado desde la cookie:', decodedUser);
+
+        // Validar si existe el ID del usuario
+        if (!decodedUser.id) {
+            console.log('Cookie inválida: no contiene ID de usuario.');
+            return res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
+        }
+
+        // Consulta a la base de datos para validar la existencia del usuario
+        const user = await User.findById(decodedUser.id);
+        if (!user) {
+            console.log('Usuario no encontrado en la base de datos.');
+            return res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
+        }
+
+        // Si el usuario es válido, lo agregamos al objeto `req` para uso posterior
+        req.user = user;
+        console.log('Autenticación exitosa. Usuario:', user);
+        next(); // Usuario autenticado, continúa con la siguiente función
+    } catch (error) {
+        console.error('Error al procesar la cookie de usuario:', error);
+        return res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
+    }
+};
+        
     
     // En modo de prueba, omitimos la verificación de autenticación
-    if (process.env.NODE_ENV === 'test') {
-        return next();
-    }
+    // if (process.env.NODE_ENV === 'test') {
+    //     return next();
+    // }
 
-    console.log('req.session.passport en gameController: ', req.session.passport);
-    // Verifica si la sesión existe y si contiene un usuario autenticado
-    if (req.session && req.session.passport && req.session.passport.user) {
-        return next(); // Usuario autenticado, continúa
-    }
+    // console.log('req.session.passport en gameController: ', req.session.passport);
+    // // Verifica si la sesión existe y si contiene un usuario autenticado
+    // if (req.session && req.session.passport && req.session.passport.user) {
+    //     return next(); // Usuario autenticado, continúa
+    // }
 
-    console.log('Usuario no autenticado o sesión inválida.');
-    res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
-};
+    // console.log('Usuario no autenticado o sesión inválida.');
+    // res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
+// };
 
 // Método para obtener todas las partidas guardadas
 const getAllGames = async (req, res) => {
