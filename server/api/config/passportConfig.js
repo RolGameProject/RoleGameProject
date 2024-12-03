@@ -30,7 +30,7 @@ const createSHA256Hash = (data) => {
 //         console.error('Error al deserializar usuario:', error);
 //         done(error, null); // En caso de error, pasa el error
 //     }
-});
+// });
 
 // Configuración de la estrategia de autenticación de Google
 passport.use(new GoogleStrategy({
