@@ -44,12 +44,12 @@ router.get('/google/callback', (req, res, next) => {
 
 // Ruta para obtener datos del usuario autenticado
 router.get('/user', (req, res) => {
-    // console.log('req en auth/user:',req);
-    // if (req.ensureAuthenticated()) {
+    console.log('req en auth/user:',req);
+    if (req.ensureAuthenticated()) {
         res.status(200).json(req.user);  // Devuelve el usuario si está autenticado
-    // } else {
-        // res.status(401).json({ message: 'No autenticado' });  // Si no está autenticado, devuelve 401
-    // }
+    } else {
+        res.status(401).json({ message: 'No autenticado' });  // Si no está autenticado, devuelve 401
+    }
 });
 
 // router.get('/user', ensureAuthenticated, async (req, res) => {
@@ -80,11 +80,11 @@ router.get('/success', (req, res) => {
     console.log('Solicitud a /success recibida');
     console.log('Usuario autenticado:', req.user);
     console.log('Req en success: ', req);
-    // if (req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
         res.status(200).json({ message: 'Inicio de sesión exitoso', authenticated: true, user: req.user });
-    // } else {
-        // res.status(401).json({ authenticated: false, message: 'Usuario no autenticado' });
-    // }
+    } else {
+        res.status(401).json({ authenticated: false, message: 'Usuario no autenticado' });
+    }
 });
 
 // Ruta de fallo de autenticación
