@@ -1,7 +1,7 @@
 // Archivo de configuración BACKEND principal
 const express = require('express');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
+// const session = require('express-session');
+// const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -66,7 +66,7 @@ console.log('Express configurado para JSON y formularios');
 
 // Inicializamos Passport
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 console.log('Passport inicializado');
 
 // Función para conectar con la base de datos
@@ -119,16 +119,16 @@ console.log('Ruta /api/interaction configurada');
 // app.use('/api/turns', turnRoutes); // Ruta para manejar los turnos
 
 // Ruta de ejemplo para probar la sesión
-app.get('/test-session', (req, res) => {
-    console.log('Sesión actual en /test-session:', req.session);
-    if (req.session.user) {
-        console.log('Usuario autenticado:', req.session.user);
-        res.send('Sesión activa');
-    } else {
-        console.log('Usuario no autenticado');
-        res.send('Sesión no activa');
-    }
-});
+// app.get('/test-session', (req, res) => {
+//     console.log('Sesión actual en /test-session:', req.session);
+//     if (req.session.user) {
+//         console.log('Usuario autenticado:', req.session.user);
+//         res.send('Sesión activa');
+//     } else {
+//         console.log('Usuario no autenticado');
+//         res.send('Sesión no activa');
+//     }
+// });
 
 // Exporta la app para que Vercel la gestione
 module.exports = async (req, res) => {
