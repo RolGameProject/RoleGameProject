@@ -8,14 +8,6 @@ const { ensureAuthenticated } = require('../controllers/gameController');
 
 const FRONT_URL = process.env.REACT_APP_FRONTEND_URL;
 
-const cookieOptions = {
-    httpOnly: true, // Las cookies no se pueden acceder desde el cliente mediante JavaScript
-    secure: process.env.NODE_ENV === 'production', // Cookies solo se envían por HTTPS en producción
-    sameSite: 'None', // Permitir cross-origin cookies (importante para Vercel)
-    maxAge: 24 * 60 * 60 * 1000, // Expiración de la cookie: 1 día
-    domain: 'https://role-game-project.vercel.app/'
-};
-
 // Ruta para registrar un nuevo usuario
 router.post('/register', (req, res, next) => {
     console.log('Registro de usuario solicitado. Datos del cuerpo:', req.body);
@@ -35,9 +27,15 @@ router.get('/google', (req, res, next) => {
     next();
 }, passport.authenticate('google', {
     scope: ['profile', 'email'], // Solicitamos acceso al perfil y correo electrónico del usuario
-    session: false
+    session: true
 }));
 
+const cookieOptions = {
+    httpOnly: true, // Las cookies no se pueden acceder desde el cliente mediante JavaScript
+    secure: process.env.NODE_ENV === 'production', // Cookies solo se envían por HTTPS en producción
+    sameSite: 'None', // Permitir cross-origin cookies (importante para Vercel)
+    maxAge: 24 * 60 * 60 * 1000 // Expiración de la cookie: 1 día
+};
 
 // Ruta de callback de Google después de la autenticación
 // router.get('/google/callback', (req, res, next) => {
@@ -161,21 +159,13 @@ router.get('/failure', (req, res) => {
 // Ruta para verificar el estado de autenticación del usuario
 router.get('/status', (req, res) => {
     console.log('Verificación de estado de autenticación');
-    if (req.user) {
+    console.log('Usuario autenticado:', req.user);
+    if (req.isAuthenticated()) {
         res.json({ isAuthenticated: true, user: req.user });
     } else {
         res.json({ isAuthenticated: false });
     }
 });
-// router.get('/status', (req, res) => {
-//     console.log('Verificación de estado de autenticación');
-//     console.log('Usuario autenticado:', req.user);
-//     if (req.isAuthenticated()) {
-//         res.json({ isAuthenticated: true, user: req.user });
-//     } else {
-//         res.json({ isAuthenticated: false });
-//     }
-// });
 
 router.get('/logout', (req, res) => {
     console.log('Solicitud de cierre de sesión recibida');
