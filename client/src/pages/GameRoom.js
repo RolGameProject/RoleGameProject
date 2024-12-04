@@ -32,7 +32,7 @@ function GameRoom() {
 
 
   const { gameId, discordLink } = location.state || {};
-  console.log('location.state en GameRoom: ', location.state;
+  console.log('location.state en GameRoom: ', location.state);
 
    const fetchGameDetails = useCallback(async () => {
     try {
