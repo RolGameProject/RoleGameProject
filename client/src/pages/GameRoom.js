@@ -1,4 +1,4 @@
-import React, { useCallback, useState/*, useEffect */} from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import ProtectedRoute from '../components/ProtectedRoute';
 // import LoadingSpinner from '../components/LoadingSpinner';
@@ -14,7 +14,7 @@ import InteractionResultModal from '../components/InteractionResultModal';
 
 function GameRoom() {
   const [isMaster, setIsMaster] = useState(false);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [gameDetails, setGameDetails] = useState(null);
   const [enemies, setEnemies] = useState([]);
   const [showCreateEnemyModal, setShowCreateEnemyModal] = useState(false);
@@ -60,21 +60,21 @@ function GameRoom() {
     }
   }, []);
 
-// const fetchAllData = useCallback(async () => {
-//   setIsLoading(true);
-//   await Promise.all([fetchGameDetails(), fetchEnemies()]);
-//   (false);
-// }, [fetchGameDetails, fetchEnemies]);
+const fetchAllData = useCallback(async () => {
+  setIsLoading(true);
+  await Promise.all([fetchGameDetails(), fetchEnemies()]);
+  (false);
+}, [fetchGameDetails, fetchEnemies]);
 
 
-  // useEffect(() => {
-  //   if (!gameId) {
-  //     navigate('/dashboard');
-  //     return;
-  // //   }
+  useEffect(() => {
+    if (!gameId) {
+      navigate('/dashboard');
+      return;
+  //   }
 
-  //   fetchAllData();
-  // }, [gameId, navigate, fetchAllData]);
+    fetchAllData();
+  }, [gameId, navigate, fetchAllData]);
 
   const handleCreateEnemy = async (enemyData) => {
     try {
@@ -110,9 +110,9 @@ function GameRoom() {
     }
   };
 
-  // if (isLoading) {
-  //   return <LoadingSpinner />;
-  // }
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   const visibleEnemies = isMaster
     ? enemies
