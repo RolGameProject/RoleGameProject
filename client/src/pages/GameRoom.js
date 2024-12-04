@@ -12,7 +12,7 @@ import { Container, Row, Col, Modal, Form } from 'react-bootstrap';
 // import { interact } from '../services/interactionService.js'
 import InteractionResultModal from '../components/InteractionResultModal';
 
-function GameRoom({ isAuthenticated }) {
+function GameRoom() {
   const [isMaster, setIsMaster] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [gameDetails, setGameDetails] = useState(null);
