@@ -71,7 +71,7 @@ const fetchAllData = useCallback(async () => {
     if (!gameId) {
       navigate('/dashboard');
       return;
-  //   }
+    }
 
     fetchAllData();
   }, [gameId, navigate, fetchAllData]);
