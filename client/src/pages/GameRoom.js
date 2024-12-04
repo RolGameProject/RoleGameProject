@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState/*, useEffect */} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import ProtectedRoute from '../components/ProtectedRoute';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -60,11 +60,11 @@ function GameRoom() {
     }
   }, []);
 
-const fetchAllData = useCallback(async () => {
-  setIsLoading(true);
-  await Promise.all([fetchGameDetails(), fetchEnemies()]);
-  setIsLoading(false);
-}, [fetchGameDetails, fetchEnemies]);
+// const fetchAllData = useCallback(async () => {
+//   setIsLoading(true);
+//   await Promise.all([fetchGameDetails(), fetchEnemies()]);
+//   setIsLoading(false);
+// }, [fetchGameDetails, fetchEnemies]);
 
 
   // useEffect(() => {
