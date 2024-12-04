@@ -18,9 +18,12 @@ export const getAllCharacters = async () => {
 // Crear un nuevo personaje
 export const createCharacter = async (characterData) => {
   try {
+    console.log("Datos enviados para crear personaje:", characterData);
     const response = await axios.post(API_URL, characterData, {
       withCredentials: true,
     });
+    // Log para verificar la respuesta del servidor
+    console.log("Respuesta del servidor al crear personaje:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error al crear el personaje", error?.response?.data || error);
