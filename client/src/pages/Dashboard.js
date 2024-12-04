@@ -8,7 +8,7 @@ import CreateEntityForm from '../components/createEntityForm.js';
 import EntityCardList from '../components/EntityCardList.js';
 // import EntityDetailsModal from '../components/EntityDetailsModal.js';
 import { Button, Row, Col, Form, Toast, Modal, Card } from 'react-bootstrap';
-import ProtectedRoute from '../components/ProtectedRoute.js';
+// import ProtectedRoute from '../components/ProtectedRoute.js';
 import LoadingSpinner from '../components/LoadingSpinner.js';
 import CharacterSelectList from '../components/CharacterSelectList.js';
 // import { deleteCharacter } from '../services/characterService';
@@ -152,7 +152,7 @@ function Dashboard({ isAuthenticated }) {
   if (error) return <p>{error}</p>;
 
   return (
-    <ProtectedRoute isAuthenticated={isAuthenticated}>
+    // <ProtectedRoute isAuthenticated={isAuthenticated}>
       <div>
         <h2 className="text-center">Panel de Usuario</h2>
         <p className="text-center">Aquí puedes gestionar tus personajes y partidas.</p>
@@ -291,7 +291,7 @@ function Dashboard({ isAuthenticated }) {
           <Toast.Body>{message}</Toast.Body>
         </Toast>
       </div>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 }
 
