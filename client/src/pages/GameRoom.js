@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import ProtectedRoute from '../components/ProtectedRoute';
+// import ProtectedRoute from '../components/ProtectedRoute';
 import LoadingSpinner from '../components/LoadingSpinner';
 import axios from 'axios';
 import { getCurrentUser } from '../services/userService.js';
@@ -116,7 +116,7 @@ const fetchAllData = useCallback(async () => {
     : enemies.filter((enemy) => enemy.interactionRequired);
 
   return (
-    <ProtectedRoute isAuthenticated={isAuthenticated}>
+    // <ProtectedRoute isAuthenticated={isAuthenticated}>
       <Container>
         <div className="text-center my-4">
           <h2>Sala de Juego</h2>
@@ -310,7 +310,7 @@ const fetchAllData = useCallback(async () => {
         )}
 
       </Container>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 }
 
