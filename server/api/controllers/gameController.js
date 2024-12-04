@@ -66,6 +66,7 @@ const ensureAuthenticated = async (req, res, next) => {
 // Método para obtener todas las partidas guardadas
 const getAllGames = async (req, res) => {
     try {
+      console.log('Obteniendo todas las partidas guardadas');
       const games = await Game.find(); // Recuperamos todas las partidas desde la base de datos
       res.status(200).json(games); // Enviamos las partidas como respuesta
     } catch (error) {
@@ -182,6 +183,7 @@ const joinGame = async (req, res) => {
 const getGameDetails = async (req, res) => {
     try {
         const { gameId } = req.params; // ID de la partida desde los parámetros de la URL
+        console.log(`Buscando detalles de la partida con ID: ${gameId}`);
 
         // Buscar la partida en la base de datos y hacer populate de relaciones
         const game = await Game.findById(gameId)
@@ -213,6 +215,12 @@ const getGameDetails = async (req, res) => {
                 }));
             return acc;
         }, {});
+        console.log('Detalles de la partida encontrada:', {
+            gameId: game._id,
+            gameName: game.gameName,
+            gameMaster: game.gameMaster,
+            players: game.players.map(player => player._id),
+        });
 
         // Construir la respuesta incluyendo los personajes
         res.status(200).json({
