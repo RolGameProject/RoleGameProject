@@ -81,7 +81,7 @@ function Dashboard() {
              // Filtrar las partidas a las que está unido el usuario
         const joinedGamesData = allGames.filter(game => 
           game.players.some(player => player._id === user.id) ||
-          game.gameMaster._id === user.id
+          game.gameMaster.id === user.id
         );
         setJoinedGames(joinedGamesData);
         console.log('Partidas filtradas para el usuario:', joinedGamesData);
