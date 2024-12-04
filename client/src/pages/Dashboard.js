@@ -69,14 +69,19 @@ function Dashboard() {
         const allGames = await getAllGames();
   
         // Filtrar las partidas a las que está unido el usuario
-        const joinedGamesData = [];
-        for (let game of allGames) {
-          const gameDetails = await getGameDetails(game._id);
+        // const joinedGamesData = [];
+        // for (let game of allGames) {
+        //   const gameDetails = await getGameDetails(game._id);
 
-          if (gameDetails.players.some(player => player._id === user._id) || gameDetails.gameMaster.id === user.userId) {
-            joinedGamesData.push(gameDetails);
-          }
-        }
+        //   if (gameDetails.players.some(player => player._id === user._id) || gameDetails.gameMaster._id === user._id) {
+        //     joinedGamesData.push(gameDetails);
+        //   }
+        // }
+             // Filtrar las partidas a las que está unido el usuario
+        const joinedGamesData = allGames.filter(game => 
+          game.players.some(player => player._id === user._id) ||
+          game.gameMaster._id === user._id
+        );
         setJoinedGames(joinedGamesData);
 
   
