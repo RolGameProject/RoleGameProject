@@ -6,6 +6,7 @@ exports.createCharacter = async (req, res) => {
 
 console.log('req en characterController createCharacter: ', req);
 console.log('req.user en characterController createCharacter: ', req.user);
+console.log('req.cookie en characterController createCharacter: ', req.cookie);
   
   // Verificar que el usuario esté autenticado (y que req.user exista)
   if (!req.user) {
