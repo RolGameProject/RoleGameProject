@@ -14,7 +14,7 @@ import InteractionResultModal from '../components/InteractionResultModal';
 
 function GameRoom() {
   const [isMaster, setIsMaster] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [gameDetails, setGameDetails] = useState(null);
   const [enemies, setEnemies] = useState([]);
   const [showCreateEnemyModal, setShowCreateEnemyModal] = useState(false);
@@ -63,7 +63,7 @@ function GameRoom() {
 // const fetchAllData = useCallback(async () => {
 //   setIsLoading(true);
 //   await Promise.all([fetchGameDetails(), fetchEnemies()]);
-//   setIsLoading(false);
+//   (false);
 // }, [fetchGameDetails, fetchEnemies]);
 
 
@@ -110,9 +110,9 @@ function GameRoom() {
     }
   };
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  // if (isLoading) {
+  //   return <LoadingSpinner />;
+  // }
 
   const visibleEnemies = isMaster
     ? enemies
