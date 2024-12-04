@@ -5,7 +5,7 @@ const characterController = require('../controllers/characterController');
 const { ensureAuthenticated } = require('../controllers/gameController');
 
 // Crear un nuevo personaje
-router.post('/', characterController.createCharacter);
+router.post('/', ensureAuthenticated, characterController.createCharacter);
 
 // Obtener todos los personajes
 router.get('/', characterController.getAllCharacters);
