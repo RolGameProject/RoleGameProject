@@ -77,6 +77,7 @@ const getAllGames = async (req, res) => {
 // Crear una nueva partida
 const createGame = async (req, res) => {
     try {
+        console.log('req en createGame Controller: ', req);
 
         // Extraemos el nombre de la partida y el gameMaster del cuerpo de la petición
         const { gameName, gameMaster } = req.body;
