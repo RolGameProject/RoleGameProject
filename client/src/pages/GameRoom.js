@@ -44,6 +44,7 @@ function GameRoom() {
       setGameDetails(game);
       setIsMaster(game.gameMaster.id === user.userId);
     } catch (error) {
+      console.log('Error en fetchGameDetails');
       console.error('Error al obtener los detalles de la partida:', error);
       navigate('/dashboard');
     }
