@@ -67,6 +67,7 @@ function Dashboard() {
   
         // Obtener todas las partidas guardadas
         const allGames = await getAllGames();
+        console.log('Todas las partidas obtenidas:', allGames);
   
         // Filtrar las partidas a las que está unido el usuario
         // const joinedGamesData = [];
@@ -83,6 +84,7 @@ function Dashboard() {
           game.gameMaster._id === user._id
         );
         setJoinedGames(joinedGamesData);
+        console.log('Partidas filtradas para el usuario:', joinedGamesData);
 
   
         setLoading(false); // Todo cargado correctamente
