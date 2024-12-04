@@ -36,6 +36,7 @@ function GameRoom() {
 
    const fetchGameDetails = useCallback(async () => {
     try {
+      console.log('gameId en fetchGameDetails gameroom: ', gameId);
       const user = await getCurrentUser(); // Asegúrate de que esta función esté definida y funcione correctamente
       console.log('user en gameroom: ', user);
       const response = await axios.get(`/api/games/${gameId}/details`);
@@ -67,7 +68,7 @@ const fetchAllData = useCallback(async () => {
   setIsLoading(false);
 }, [fetchGameDetails, fetchEnemies]);
 
-
+  console.log('gameId antes de useEffect en gameroom: ', gameId);
   useEffect(() => {
     if (!gameId) {
       console.log('error en useEffect GameRoom');
