@@ -82,7 +82,7 @@ const createGame = async (req, res) => {
 
         // Extraemos el nombre de la partida y el gameMaster del cuerpo de la petición
         const { gameName } = req.body;
-        const gameMaster = req.user;
+        const gameMaster = req.user._id;
         console.log('req.body en createGame Controller: ', req.body);
         // Verificamos si el gameMaster existe en la base de datos
         const masterExists = await User.findById(gameMaster);
