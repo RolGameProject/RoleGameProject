@@ -78,6 +78,7 @@ const getAllGames = async (req, res) => {
 const createGame = async (req, res) => {
     try {
         console.log('req en createGame Controller: ', req);
+        console.log('req.user en createGame Controller: ', req.user);
 
         // Extraemos el nombre de la partida y el gameMaster del cuerpo de la petición
         const { gameName, gameMaster } = req.body;
@@ -87,6 +88,7 @@ const createGame = async (req, res) => {
         const masterExists = await User.findById(gameMaster);
         if (!masterExists) {
             // Si no encontramos al gameMaster, devolvemos un error 404
+            console.log('master no encontrado');
             return res.status(404).json({ message: 'Game Master no encontrado' });
         }
 
