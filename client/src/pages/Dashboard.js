@@ -13,7 +13,7 @@ import LoadingSpinner from '../components/LoadingSpinner.js';
 import CharacterSelectList from '../components/CharacterSelectList.js';
 // import { deleteCharacter } from '../services/characterService';
 
-function Dashboard() {
+function Dashboard({isAuthenticated }) {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
