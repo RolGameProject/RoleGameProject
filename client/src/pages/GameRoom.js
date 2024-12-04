@@ -36,8 +36,10 @@ function GameRoom() {
    const fetchGameDetails = useCallback(async () => {
     try {
       const user = await getCurrentUser(); // Asegúrate de que esta función esté definida y funcione correctamente
+      console.log('user en gameroom: ', user);
       const response = await axios.get(`/api/games/${gameId}/details`);
       const game = response.data;
+      console.log('game en gameroom: ', game);
 
       setGameDetails(game);
       setIsMaster(game.gameMaster.id === user.userId);
