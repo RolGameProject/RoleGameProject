@@ -69,6 +69,7 @@ const fetchAllData = useCallback(async () => {
 
   useEffect(() => {
     if (!gameId) {
+      console.log('error en useEffect GameRoom');
       navigate('/dashboard');
       return;
     }
