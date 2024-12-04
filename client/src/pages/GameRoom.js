@@ -67,11 +67,11 @@ const fetchAllData = useCallback(async () => {
 }, [fetchGameDetails, fetchEnemies]);
 
 
-  useEffect(() => {
-    if (!gameId) {
-      navigate('/dashboard');
-      return;
-    }
+  // useEffect(() => {
+  //   if (!gameId) {
+  //     navigate('/dashboard');
+  //     return;
+  //   }
 
     fetchAllData();
   }, [gameId, navigate, fetchAllData]);
