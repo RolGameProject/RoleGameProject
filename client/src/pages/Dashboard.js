@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createCharacter, getCharactersByUser } from '../services/characterService';
-import { createGame, joinGame, getGameDetails, getAllGames } from '../services/gameService';
+import { createGame, joinGame, /*getGameDetails,*/ getAllGames } from '../services/gameService';
 import { getCurrentUser } from '../services/userService.js';
 import CreateEntityForm from '../components/createEntityForm.js';
 import EntityCardList from '../components/EntityCardList.js';
