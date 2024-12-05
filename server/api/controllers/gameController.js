@@ -121,6 +121,7 @@ const createGame = async (req, res) => {
 // Unirse a una partida existente
 const joinGame = async (req, res) => {
     try {
+        console.log('Solicitud recibida en joinGame:', req.body); // Log de los datos recibidos en el servidor
 
         // Extraemos el ID de la partida y el ID del jugador del cuerpo de la petición
         const { gameName, playerId, characterId } = req.body;
@@ -133,28 +134,37 @@ const joinGame = async (req, res) => {
         // Verificamos si el jugador existe en la base de datos
         const playerExists = await User.findById(playerId);
         if (!playerExists) {
+            
+            console.log('Jugador no encontrado:', playerId);
+
             return res.status(404).json({ message: 'Jugador no encontrado' });
         }
 
         // Verificamos si el personaje existe en la base de datos
         const character = await Character.findById(characterId);
         if (!character) {
+            
+            console.log('Personaje no encontrado:', characterId);
             return res.status(404).json({ message: 'Personaje no encontrado' });
         }
 
         // Verificamos si el personaje pertenece al jugador
         if (character.userId.toString() !== playerId) {
+            console.log('El personaje no pertenece al jugador:', { playerId, characterUserId: character.userId });
+      
             return res.status(403).json({ message: 'El personaje no pertenece al jugador' });
         }
 
         // Buscamos la partida por su ID
         const game = await Game.findById(gameName);
         if (!game) {
+            console.log('Partida no encontrada:', gameName);
             return res.status(404).json({ message: 'Partida no encontrada' });
         }
 
         // Verificamos si la partida está activa
         if (game.status !== 'active') {
+            console.log('La partida no está activa:', game.status);
             return res.status(400).json({ message: 'La partida no está activa.' });
         } 
 
@@ -168,6 +178,7 @@ const joinGame = async (req, res) => {
             game.players.push(playerId);
             await game.save(); // Guardamos los cambios en la base de datos
         }
+        console.log('Estado actualizado del juego:', game);
 
         // Crear la invitación para el canal de Discord de la partida
         const invite = await discordClient.createGameInvite(game.discordChannelId); // Usamos el ID del canal para crear la invitación
@@ -180,6 +191,7 @@ const joinGame = async (req, res) => {
             invitationLink: invite, //Incluimos el enlace de la invitación
         });
     } catch (error) {
+        console.error('Error en joinGame:', error);
         res.status(500).json({ message: 'Error al unirse a la partida', error: error.message });
     }
 };
