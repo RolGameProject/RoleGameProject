@@ -120,7 +120,7 @@ const createGame = async (req, res) => {
 
 // Unirse a una partida existente
 const joinGame = async (req, res) => {
-    console.log('gameName en controlador: ', gameName);
+    // console.log('gameName en controlador: ', gameName);
     console.log('playerId en controlador: ', playerId);
     console.log('characterId en controlador: ', characterId);
     try {
