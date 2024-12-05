@@ -129,7 +129,7 @@ const joinGame = async (req, res) => {
         // Extraemos el ID de la partida y el ID del jugador del cuerpo de la petición
         const { gameName, playerId, characterId } = req.body;
 
-        console.log('gameName en controlador: ', gameName);
+        // console.log('gameName en controlador: ', gameName);
         console.log('playerId en controlador: ', playerId);
         console.log('characterId en controlador: ', characterId);
 
