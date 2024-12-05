@@ -70,6 +70,7 @@ const fetchAllData = useCallback(async () => {
 }, [fetchGameDetails, fetchEnemies]);
 
   console.log('gameId antes de useEffect en gameroom: ', gameId);
+  console.log('gameName antes de useEffect en gameroom: ', gameName);
   useEffect(() => {
     // console.log('State recibido en GameRoom:', location.state); // Confirmar lo recibido
 
