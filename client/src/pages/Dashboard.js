@@ -147,7 +147,7 @@ function Dashboard() {
       }
       console.log('user en handleJoinGame de Dashboard: ', user);
       const gameData = { gameName: gameId, playerId: user.id, characterId: selectedCharacterId };
-      console.log('Datos enviados a joinGame:', gameData); // Log antes de llamar al servicio
+      console.log('Datos enviados a joinGame en dashboard:', gameData); // Log antes de llamar al servicio
 
       const response = await joinGame(gameData);
       const discordLink = response.invitationLink;
