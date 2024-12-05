@@ -145,6 +145,7 @@ function Dashboard() {
         setShowToast(true);
         return;
       }
+      console.log('user en handleJoinGame de Dashboard: ', user);
       const gameData = { gameName: gameId, playerId: user.googleId, characterId: selectedCharacterId };
       console.log('Datos enviados a joinGame:', gameData); // Log antes de llamar al servicio
 
