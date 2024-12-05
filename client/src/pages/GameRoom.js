@@ -71,8 +71,12 @@ const fetchAllData = useCallback(async () => {
 
   console.log('gameId antes de useEffect en gameroom: ', gameId);
   useEffect(() => {
+    console.log('State recibido en GameRoom:', location.state); // Confirmar lo recibido
+
     if (!gameId) {
       console.log('error en useEffect GameRoom');
+      console.log('Error: gameId no encontrado en GameRoom, redirigiendo a dashboard');
+
       navigate('/dashboard');
       return;
     }
