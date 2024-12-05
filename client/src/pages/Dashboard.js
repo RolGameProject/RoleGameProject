@@ -228,6 +228,7 @@ function Dashboard() {
                 >
                   <Card.Body>
                     <Card.Title>{game.gameName}</Card.Title>
+                    <Card.Subtitle>{game.gameId}</Card.Subtitle>
                   </Card.Body>
 
                 </Card>
