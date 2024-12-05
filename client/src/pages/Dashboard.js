@@ -145,7 +145,7 @@ function Dashboard() {
         setShowToast(true);
         return;
       }
-      const gameData = { gameName/*: gameId*/, playerId: user.googleId, characterId: selectedCharacterId };
+      const gameData = { /*gameName/*: */gameId, playerId: user.googleId, characterId: selectedCharacterId };
       const response = await joinGame(gameData);
       const discordLink = response.invitationLink;
       navigate('/game-room', { state: { gameId, discordLink } });
