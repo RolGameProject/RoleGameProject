@@ -121,8 +121,8 @@ const createGame = async (req, res) => {
 // Unirse a una partida existente
 const joinGame = async (req, res) => {
     // console.log('gameName en controlador: ', gameName);
-    console.log('playerId en controlador: ', playerId);
-    console.log('characterId en controlador: ', characterId);
+    // console.log('playerId en controlador: ', playerId);
+    // console.log('characterId en controlador: ', characterId);
     try {
         console.log('Solicitud recibida en joinGame:', req.body); // Log de los datos recibidos en el servidor
 
@@ -130,8 +130,8 @@ const joinGame = async (req, res) => {
         const { gameName, playerId, characterId } = req.body;
 
         // console.log('gameName en controlador: ', gameName);
-        console.log('playerId en controlador: ', playerId);
-        console.log('characterId en controlador: ', characterId);
+        // console.log('playerId en controlador: ', playerId);
+        // console.log('characterId en controlador: ', characterId);
 
 
         // Verificamos si el jugador existe en la base de datos
