@@ -146,10 +146,15 @@ function Dashboard() {
         return;
       }
       const gameData = { /*gameName/*: */gameId, playerId: user.googleId, characterId: selectedCharacterId };
+      console.log('Datos enviados a joinGame:', gameData); // Log antes de llamar al servicio
+
       const response = await joinGame(gameData);
       const discordLink = response.invitationLink;
+      console.log('Navegando a GameRoom con state:', { gameId, discordLink }); // Verificar datos de state
+
       navigate('/game-room', { state: { gameId, discordLink } });
     } catch (error) {
+      console.error('Error uniéndose a la partida:', error);
       setMessage('Error uniéndote a la partida');
       setShowToast(true);
     }
