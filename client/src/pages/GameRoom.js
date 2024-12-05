@@ -70,11 +70,11 @@ const fetchAllData = useCallback(async () => {
 
   console.log('gameId antes de useEffect en gameroom: ', gameId);
   useEffect(() => {
-    // if (!gameId) {
-    //   console.log('error en useEffect GameRoom');
-    //   navigate('/dashboard');
-    //   return;
-    // }
+    if (!gameId) {
+      console.log('error en useEffect GameRoom');
+      navigate('/dashboard');
+      return;
+    }
 
     fetchAllData();
   }, [gameId, navigate, fetchAllData]);
