@@ -228,7 +228,6 @@ function Dashboard() {
                 >
                   <Card.Body>
                     <Card.Title>{game.gameName}</Card.Title>
-                    <Card.Subtitle>{game._id}</Card.Subtitle>
                   </Card.Body>
 
                 </Card>
