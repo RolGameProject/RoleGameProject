@@ -14,11 +14,11 @@ export const createGame = async (gameData) => {
       throw new Error('Usuario no autenticado');
     }
 
-    const gameMaster = user.userId;  // Usa googleId en lugar de userId
+    const gameMaster = user.userId;  
 
     const response = await axios.post(
       `${API_URL}/api/games/create`,
-      { ...gameData, gameMaster }, // Enviar googleId como gameMaster
+      { ...gameData, gameMaster }, 
       { withCredentials: true }
     );
 
@@ -53,7 +53,7 @@ export const joinGame = async (gameData) => {
       throw new Error('Usuario no autenticado');
     }
 
-    const playerId = user.userId;  // Usa googleId en lugar de userId
+    const playerId = user.userId;
 
     const response = await axios.post(
       `${API_URL}/api/games/join`,
