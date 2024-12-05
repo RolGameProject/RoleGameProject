@@ -59,7 +59,7 @@ function Dashboard() {
           setLoading(false);
           return;
         }
-        console.log('Usuario autenticado:', user);
+        // console.log('Usuario autenticado:', user);
   
         // Obtener personajes del usuario
         const charactersResponse = await getCharactersByUser();
@@ -67,7 +67,7 @@ function Dashboard() {
   
         // Obtener todas las partidas guardadas
         const allGames = await getAllGames();
-        console.log('Todas las partidas obtenidas:', allGames);
+        // console.log('Todas las partidas obtenidas:', allGames);
   
         // Filtrar las partidas a las que está unido el usuario
         // const joinedGamesData = [];
@@ -145,13 +145,13 @@ function Dashboard() {
         setShowToast(true);
         return;
       }
-      console.log('user en handleJoinGame de Dashboard: ', user);
+      // console.log('user en handleJoinGame de Dashboard: ', user);
       const gameData = { gameName: gameId, playerId: user.id, characterId: selectedCharacterId };
-      console.log('Datos enviados a joinGame en dashboard:', gameData); // Log antes de llamar al servicio
+      // console.log('Datos enviados a joinGame en dashboard:', gameData); // Log antes de llamar al servicio
 
       const response = await joinGame(gameData);
       const discordLink = response.invitationLink;
-      console.log('Navegando a GameRoom con state:', { gameId, discordLink }); // Verificar datos de state
+      // console.log('Navegando a GameRoom con state:', { gameId, discordLink }); // Verificar datos de state
 
       navigate('/game-room', { state: { gameId, discordLink } });
     } catch (error) {
