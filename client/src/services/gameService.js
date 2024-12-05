@@ -55,10 +55,15 @@ export const joinGame = async (gameData) => {
 
     const playerId = user.userId;
 
+    console.log('Datos enviados al servidor para unirse:', { ...gameData, playerId }); // Log de los datos enviados
+    
     const response = await axios.post(
       `${API_URL}/api/games/join`,
       { ...gameData, playerId },
       { withCredentials: true });
+    
+      console.log('Respuesta del servidor al unirse:', response.data); // Log de la respuesta
+
     return response.data;
   } catch (error) {
     console.error('Error joining game:', error);
