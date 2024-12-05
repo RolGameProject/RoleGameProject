@@ -100,8 +100,8 @@ const connectDB = async () => {
                 process.exit(1);
             }
         }
-    } else {
-        console.log('Ya existe una conexión activa con la base de datos');
+    // } else {
+    //     console.log('Ya existe una conexión activa con la base de datos');
     }
 };
 
