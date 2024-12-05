@@ -10,36 +10,36 @@ const ensureAuthenticated = async (req, res, next) => {
     // console.log('req.user:', req.user);
     // console.log('req.session:', req.session);
 
-    console.log('Revisando autenticación basada en cookies...');
+    // console.log('Revisando autenticación basada en cookies...');
 
     const userCookie = req.cookies.user;
 
     if (!userCookie) {
-        console.log('No se encontró la cookie de usuario.');
+        // console.log('No se encontró la cookie de usuario.');
         return res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
     }
 
     try {
         // Decodificar la cookie (URL decoding y JSON parsing)
         const decodedUser = JSON.parse(decodeURIComponent(userCookie));
-        console.log('Usuario decodificado desde la cookie:', decodedUser);
+        // console.log('Usuario decodificado desde la cookie:', decodedUser);
 
         // Validar si existe el ID del usuario
         if (!decodedUser.id) {
-            console.log('Cookie inválida: no contiene ID de usuario.');
+            // console.log('Cookie inválida: no contiene ID de usuario.');
             return res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
         }
 
         // Consulta a la base de datos para validar la existencia del usuario
         const user = await User.findById(decodedUser.id);
         if (!user) {
-            console.log('Usuario no encontrado en la base de datos.');
+            // console.log('Usuario no encontrado en la base de datos.');
             return res.status(401).json({ message: 'No autorizado. Por favor, inicia sesión.' });
         }
 
         // Si el usuario es válido, lo agregamos al objeto `req` para uso posterior
         req.user = user;
-        console.log('Autenticación exitosa. Usuario:', user);
+        // console.log('Autenticación exitosa. Usuario:', user);
         next(); // Usuario autenticado, continúa con la siguiente función
     } catch (error) {
         console.error('Error al procesar la cookie de usuario:', error);
@@ -66,7 +66,7 @@ const ensureAuthenticated = async (req, res, next) => {
 // Método para obtener todas las partidas guardadas
 const getAllGames = async (req, res) => {
     try {
-      console.log('Obteniendo todas las partidas guardadas');
+      // console.log('Obteniendo todas las partidas guardadas');
       const games = await Game.find(); // Recuperamos todas las partidas desde la base de datos
       res.status(200).json(games); // Enviamos las partidas como respuesta
     } catch (error) {
