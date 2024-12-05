@@ -32,22 +32,22 @@ function GameRoom() {
 
 
   const { gameId, discordLink } = location.state || {};
-  console.log('location.state en GameRoom: ', location.state);
-  console.log('Datos recibidos en GameRoom: ', {gameId, discordLink});
+  // console.log('location.state en GameRoom: ', location.state);
+  // console.log('Datos recibidos en GameRoom: ', {gameId, discordLink});
 
    const fetchGameDetails = useCallback(async () => {
     try {
-      console.log('gameId en fetchGameDetails gameroom: ', gameId);
+      // console.log('gameId en fetchGameDetails gameroom: ', gameId);
       const user = await getCurrentUser(); // Asegúrate de que esta función esté definida y funcione correctamente
-      console.log('user en gameroom: ', user);
+      // console.log('user en gameroom: ', user);
       const response = await axios.get(`/api/games/${gameId}/details`);
       const game = response.data;
-      console.log('game en gameroom: ', game);
+      // console.log('game en gameroom: ', game);
 
       setGameDetails(game);
       setIsMaster(game.gameMaster.id === user./*userI*/id);
     } catch (error) {
-      console.log('Error en fetchGameDetails');
+      // console.log('Error en fetchGameDetails');
       console.error('Error al obtener los detalles de la partida:', error);
       navigate('/dashboard');
     }
@@ -69,13 +69,13 @@ const fetchAllData = useCallback(async () => {
   setIsLoading(false);
 }, [fetchGameDetails, fetchEnemies]);
 
-  console.log('gameId antes de useEffect en gameroom: ', gameId);
+  // console.log('gameId antes de useEffect en gameroom: ', gameId);
   useEffect(() => {
-    console.log('State recibido en GameRoom:', location.state); // Confirmar lo recibido
+    // console.log('State recibido en GameRoom:', location.state); // Confirmar lo recibido
 
     if (!gameId) {
-      console.log('error en useEffect GameRoom');
-      console.log('Error: gameId no encontrado en GameRoom, redirigiendo a dashboard');
+      // console.log('error en useEffect GameRoom');
+      // console.log('Error: gameId no encontrado en GameRoom, redirigiendo a dashboard');
 
       navigate('/dashboard');
       return;
