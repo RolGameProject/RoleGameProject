@@ -52,10 +52,10 @@ export const joinGame = async (gameData) => {
       console.error('Usuario no autenticado');
       throw new Error('Usuario no autenticado');
     }
-
+    console.log('user en servicio: ', user);
     const playerId = user.userId;
 
-    console.log('Datos enviados al servidor para unirse:', { ...gameData, playerId }); // Log de los datos enviados
+    console.log('Datos enviados al servidor para unirse en servicio:', { ...gameData, playerId }); // Log de los datos enviados
     
     const response = await axios.post(
       `${API_URL}/api/games/join`,
