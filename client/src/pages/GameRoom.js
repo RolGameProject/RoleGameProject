@@ -1,4 +1,4 @@
-import React, { useCallback, useState/*, useEffect */} from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import ProtectedRoute from '../components/ProtectedRoute';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -68,16 +68,16 @@ const fetchAllData = useCallback(async () => {
   setIsLoading(false);
 }, [fetchGameDetails, fetchEnemies]);
 
-  // console.log('gameId antes de useEffect en gameroom: ', gameId);
-  // useEffect(() => {
-  //   if (!gameId) {
-  //     console.log('error en useEffect GameRoom');
-  //     navigate('/dashboard');
-  //     return;
-  //   }
+  console.log('gameId antes de useEffect en gameroom: ', gameId);
+  useEffect(() => {
+    // if (!gameId) {
+    //   console.log('error en useEffect GameRoom');
+    //   navigate('/dashboard');
+    //   return;
+    // }
 
-  //   fetchAllData();
-  // }, [gameId, navigate, fetchAllData]);
+    fetchAllData();
+  }, [gameId, navigate, fetchAllData]);
 
   const handleCreateEnemy = async (enemyData) => {
     try {
