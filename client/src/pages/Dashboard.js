@@ -145,7 +145,7 @@ function Dashboard() {
         setShowToast(true);
         return;
       }
-      const gameData = { /*gameName/*: */gameId, playerId: user.googleId, characterId: selectedCharacterId };
+      const gameData = { gameName: gameId, playerId: user.googleId, characterId: selectedCharacterId };
       console.log('Datos enviados a joinGame:', gameData); // Log antes de llamar al servicio
 
       const response = await joinGame(gameData);
