@@ -6,7 +6,7 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 export const getCurrentUser = async () => {
     try {
         const response = await axios.get(`${API_URL}/api/auth/user`, { withCredentials: true });
-        console.log('Response.data en servicio usuarios: ', response.data);
+        // console.log('Response.data en servicio usuarios: ', response.data);
         return response.data;  
     } catch (error) {
         console.error('Error al obtener el usuario autenticado:', error);
