@@ -19,13 +19,13 @@ const FRONTEND = process.env.REACT_APP_FRONTEND_URL;
 
 // Cargamos las variables de entorno desde el archivo .env
 dotenv.config();
-console.log('Variables de entorno cargadas:', {
-    NODE_ENV: process.env.NODE_ENV,
-    PORT: process.env.PORT,
-    MONGODB_URI: process.env.MONGODB_URI,
-    USE_MEMORY_DB: process.env.USE_MEMORY_DB,
-    FRONTEND
-});
+// console.log('Variables de entorno cargadas:', {
+//     NODE_ENV: process.env.NODE_ENV,
+//     PORT: process.env.PORT,
+//     MONGODB_URI: process.env.MONGODB_URI,
+//     USE_MEMORY_DB: process.env.USE_MEMORY_DB,
+//     FRONTEND
+// });
 
 // Creamos una instancia de la aplicación Express
 const app = express();
@@ -36,7 +36,7 @@ app.use(cors({
     origin: FRONTEND,
     credentials: true
 }));
-console.log('CORS configurado con origen:', FRONTEND);
+// console.log('CORS configurado con origen:', FRONTEND);
 
 // Configurar sesión para almacenar la sesión del usuario
 app.use(session({
@@ -57,45 +57,45 @@ app.use(session({
         })
         : undefined
 }));
-console.log('Sesión configurada correctamente');
+// console.log('Sesión configurada correctamente');
 
 // Configuramos Express para que acepte JSON y formularios codificados
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-console.log('Express configurado para JSON y formularios');
+// console.log('Express configurado para JSON y formularios');
 
 // Inicializamos Passport
 app.use(passport.initialize());
 app.use(passport.session());
-console.log('Passport inicializado');
+// console.log('Passport inicializado');
 
 // Función para conectar con la base de datos
 const connectDB = async () => {
-    console.log('Iniciando conexión a la base de datos...');
-    console.log('Estado actual de la conexión:', mongoose.connection.readyState);
+    // console.log('Iniciando conexión a la base de datos...');
+    // console.log('Estado actual de la conexión:', mongoose.connection.readyState);
 
     if (mongoose.connection.readyState === 0) { // Solo conecta si no hay una conexión activa
         if (process.env.USE_MEMORY_DB === 'true') {
-            console.log('Usando MongoDB en memoria...');
+            // console.log('Usando MongoDB en memoria...');
             try {
                 mongoServer = await MongoMemoryServer.create();
                 const mongoUri = mongoServer.getUri();
-                console.log(`MongoDB en memoria iniciado en: ${mongoUri}`);
+                // console.log(`MongoDB en memoria iniciado en: ${mongoUri}`);
                 await mongoose.connect(mongoUri);
-                console.log('Conexión establecida con MongoDB en memoria');
+                // console.log('Conexión establecida con MongoDB en memoria');
             } catch (error) {
                 console.error('Error al iniciar MongoDB en memoria:', error);
                 process.exit(1);
             }
         } else {
             const uri = process.env.MONGODB_URI;
-            console.log('Intentando conectar a MongoDB Atlas...');
+            // console.log('Intentando conectar a MongoDB Atlas...');
             console.log('URI:', uri);
             try {
                 await mongoose.connect(uri, {  });
-                console.log('Conexión establecida con MongoDB Atlas');
+                // console.log('Conexión establecida con MongoDB Atlas');
             } catch (error) {
-                console.error('Error al conectar a MongoDB Atlas:', error.message);
+                // console.error('Error al conectar a MongoDB Atlas:', error.message);
                 console.error('Detalles completos del error:', error);
                 process.exit(1);
             }
@@ -107,28 +107,28 @@ const connectDB = async () => {
 
 // Configuramos las rutas que manejará el servidor
 app.use('/api/games', gameRoutes);
-console.log('Ruta /api/games configurada');
+// console.log('Ruta /api/games configurada');
 app.use('/api/auth', authRoutes);
-console.log('Ruta /api/auth configurada');
+// console.log('Ruta /api/auth configurada');
 app.use('/api/characters', characterRoutes);
-console.log('Ruta /api/characters configurada');
+// console.log('Ruta /api/characters configurada');
 app.use('/api/enemies', enemyRoutes);
-console.log('Ruta /api/enemies configurada');
+// console.log('Ruta /api/enemies configurada');
 app.use('/api/interaction', interactionRoutes);
-console.log('Ruta /api/interaction configurada');
+// console.log('Ruta /api/interaction configurada');
 // app.use('/api/turns', turnRoutes); // Ruta para manejar los turnos
 
 // Ruta de ejemplo para probar la sesión
-app.get('/test-session', (req, res) => {
-    console.log('Sesión actual en /test-session:', req.session);
-    if (req.session.user) {
-        console.log('Usuario autenticado:', req.session.user);
-        res.send('Sesión activa');
-    } else {
-        console.log('Usuario no autenticado');
-        res.send('Sesión no activa');
-    }
-});
+// app.get('/test-session', (req, res) => {
+//     console.log('Sesión actual en /test-session:', req.session);
+//     if (req.session.user) {
+//         console.log('Usuario autenticado:', req.session.user);
+//         res.send('Sesión activa');
+//     } else {
+//         console.log('Usuario no autenticado');
+//         res.send('Sesión no activa');
+//     }
+// });
 
 // Exporta la app para que Vercel la gestione
 module.exports = async (req, res) => {
