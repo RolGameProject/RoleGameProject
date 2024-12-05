@@ -125,6 +125,10 @@ const joinGame = async (req, res) => {
         // Extraemos el ID de la partida y el ID del jugador del cuerpo de la petición
         const { gameName, playerId, characterId } = req.body;
 
+        console.log('gameName en controlador: ', gameName);
+        console.log('playerId en controlador: ', playerId);
+        console.log('characterId en controlador: ', characterId);
+
 
         // Verificamos si el jugador existe en la base de datos
         const playerExists = await User.findById(playerId);
@@ -168,6 +172,7 @@ const joinGame = async (req, res) => {
         // Crear la invitación para el canal de Discord de la partida
         const invite = await discordClient.createGameInvite(game.discordChannelId); // Usamos el ID del canal para crear la invitación
 
+        console.log('invite en controlador partidas: ', invite);
 
         // Devolvemos la información de la partida actualizada
         res.status(200).json({
