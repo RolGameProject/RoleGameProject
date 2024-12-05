@@ -82,7 +82,7 @@ const fetchAllData = useCallback(async () => {
     }
 
     fetchAllData();
-  }, [gameId, navigate, fetchAllData]);
+  }, [gameId, navigate, fetchAllData, location.state]);
 
   const handleCreateEnemy = async (enemyData) => {
     try {
