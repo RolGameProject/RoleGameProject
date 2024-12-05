@@ -212,7 +212,7 @@ function Dashboard() {
 
                 <Card
                 className='h-100'
-                onClick={() => navigate('/game-room', { state: { gameId: game.gameId } })}
+                onClick={() => navigate('/game-room', { state: { gameId: game/*.gameId*/ } })}
                 style={{
                   backgroundColor: 'rgba(255,255,255,0.8)',
                   cursor: 'pointer',
