@@ -11,20 +11,20 @@ const FRONT_URL = process.env.REACT_APP_FRONTEND_URL;
 
 // Ruta para registrar un nuevo usuario
 router.post('/register', (req, res, next) => {
-    console.log('Registro de usuario solicitado. Datos del cuerpo:', req.body);
+    // console.log('Registro de usuario solicitado. Datos del cuerpo:', req.body);
     next();
 }, registerUser);
 
 // Ruta para eliminar un usuario
 router.delete('/delete/:id', (req, res, next) => {
-    console.log('Eliminación de usuario solicitada para ID:', req.params.id);
+    // console.log('Eliminación de usuario solicitada para ID:', req.params.id);
     next();
 }, deleteUser);
 
 // Ruta para iniciar sesión con Google
 router.get('/google', (req, res, next) => {
-    console.log('Inicio de sesión con Google solicitado');
-    console.log('Cookies actuales:', req.cookies); // Verificar cookies
+    // console.log('Inicio de sesión con Google solicitado');
+    // console.log('Cookies actuales:', req.cookies); // Verificar cookies
     next();
 }, passport.authenticate('google', {
     scope: ['profile', 'email'], // Solicitamos acceso al perfil y correo electrónico del usuario
@@ -57,7 +57,7 @@ router.get('/google/callback',
             return res.status(401).send('Error: Usuario no autenticado');
         }
 
-        console.log('Usuario autenticado en callback:', req.user);
+        // console.log('Usuario autenticado en callback:', req.user);
 
         // Guardar datos del usuario en una cookie
         const userData = {
@@ -66,13 +66,13 @@ router.get('/google/callback',
             email: req.user.email,
         };
 
-        console.log('userData en authRoutes callback:', req.user._id);
-        console.log('userData en authRoutes callback:', req.user.displayName);
-        console.log('userData en authRoutes callback:', req.user.email);
+        // console.log('userData en authRoutes callback:', req.user._id);
+        // console.log('userData en authRoutes callback:', req.user.displayName);
+        // console.log('userData en authRoutes callback:', req.user.email);
         
         res.cookie('user', JSON.stringify(userData), cookieOptions);
 
-        console.log('res.cookies en callback: ', res.cookie);
+        // console.log('res.cookies en callback: ', res.cookie);
 
         // Redirigir al frontend
         res.redirect(FRONT_URL + '/dashboard');
@@ -131,7 +131,7 @@ const verifyCookie = (req, res, next) => {
 
 // Ruta para obtener datos del usuario autenticado
 router.get('/user', verifyCookie, (req, res) => {
-    console.log('Usuario autenticado desde cookie:', req.user);
+    // console.log('Usuario autenticado desde cookie:', req.user);
     res.status(200).json(req.user); // Devolver los datos del usuario desde la cookie
 });
 
@@ -153,41 +153,41 @@ router.get('/success', verifyCookie, (req, res) => {
 
 // Ruta de fallo de autenticación
 router.get('/failure', (req, res) => {
-    console.log('Fallo de autenticación detectado');
+    // console.log('Fallo de autenticación detectado');
     res.status(401).json({ message: 'Fallo en la autenticación' });
 });
 
 // Ruta para verificar el estado de autenticación del usuario
 
 router.get('/status', async (req, res) => {
-    console.log('Verificación de estado de autenticación basada en cookies...');
+    // console.log('Verificación de estado de autenticación basada en cookies...');
     
     const userCookie = req.cookies.user;
 
     if (!userCookie) {
-        console.log('No se encontró la cookie de usuario.');
+        // console.log('No se encontró la cookie de usuario.');
         return res.json({ isAuthenticated: false });
     }
 
     try {
         // Decodificar y parsear la cookie
         const decodedUser = JSON.parse(decodeURIComponent(userCookie));
-        console.log('Usuario decodificado desde la cookie:', decodedUser);
+        // console.log('Usuario decodificado desde la cookie:', decodedUser);
 
         // Validar si existe el ID del usuario
         if (!decodedUser.id) {
-            console.log('Cookie inválida: no contiene ID de usuario.');
+            // console.log('Cookie inválida: no contiene ID de usuario.');
             return res.json({ isAuthenticated: false });
         }
 
         // Consultar en la base de datos para verificar la existencia del usuario
         const user = await User.findById(decodedUser.id);
         if (!user) {
-            console.log('Usuario no encontrado en la base de datos.');
+            // console.log('Usuario no encontrado en la base de datos.');
             return res.json({ isAuthenticated: false });
         }
 
-        console.log('Usuario autenticado:', user);
+        // console.log('Usuario autenticado:', user);
         res.json({ isAuthenticated: true, user });
     } catch (error) {
         console.error('Error al procesar la cookie de usuario:', error);
@@ -206,7 +206,7 @@ router.get('/status', async (req, res) => {
 // });
 
 router.get('/logout', (req, res) => {
-    console.log('Solicitud de cierre de sesión recibida');
+    // console.log('Solicitud de cierre de sesión recibida');
     res.clearCookie('user', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
