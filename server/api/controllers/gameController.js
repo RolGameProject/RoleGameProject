@@ -214,6 +214,7 @@ const getGameDetails = async (req, res) => {
             //    /* path: */'characters',/*
             //     select:*/ 'name classType health abilities userId',
             // /*}*/);
+        );
 
         if (!game) {
             // Si no se encuentra la partida, devolvemos un error 404
