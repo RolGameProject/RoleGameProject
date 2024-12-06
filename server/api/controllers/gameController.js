@@ -209,12 +209,12 @@ const getGameDetails = async (req, res) => {
         const game = await Game.findById(gameId)
             .populate('gameMaster', 'googleId displayName email') // Datos del máster
             .populate('players', 'googleId displayName email') // Datos de los jugadores
-            .populate('finishedPlayers', 'googleId displayName email') // Jugadores que han terminado turno
+            .populate('finishedPlayers', 'googleId displayName email'); // Jugadores que han terminado turno
             // .populate(/*{*/
             //    /* path: */'characters',/*
             //     select:*/ 'name classType health abilities userId',
             // /*}*/);
-        ;
+   
 
         if (!game) {
             // Si no se encuentra la partida, devolvemos un error 404
@@ -240,7 +240,8 @@ const getGameDetails = async (req, res) => {
         const playerIds = game.players.map(player => player._id);
 
         // Buscar los personajes asociados a los jugadores
-        const characters = game.characters.map(character => character._id);
+        const characters = await Character.find({ userId: { $in: playerIds } });
+        // const characters = game.characters.map(character => character._id);
 
         // Mapeamos los personajes por jugador
         const charactersByPlayer = playerIds.reduce((acc, playerId) => {
