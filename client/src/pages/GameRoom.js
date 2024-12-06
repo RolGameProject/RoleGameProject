@@ -46,7 +46,7 @@ function GameRoom() {
 
       setGameDetails(game);
       // console.log('GameDetails en GameRoom: ', gameDetails);
-      console.log('game en GameRoom: ', game);
+      // console.log('game en GameRoom: ', game);
       setIsMaster(game.gameMaster.id === user./*userI*/id);
     } catch (error) {
       // console.log('Error en fetchGameDetails');
@@ -89,17 +89,17 @@ const fetchAllData = useCallback(async () => {
   const handleCreateEnemy = async (enemyData) => {
     try {
       const user = await getCurrentUser();
-      console.log('user en gameRoom createEnemy: ', user);
+      // console.log('user en gameRoom createEnemy: ', user);
       enemyData.createdBy = user.id;
-      console.log('enemyData en GameRoom antes de enviar: ', enemyData);
+      // console.log('enemyData en GameRoom antes de enviar: ', enemyData);
       const responseCreate = await axios.post('/api/enemies', enemyData, {
       withCredentials: true,
     });
-      console.log('responseCreate.data en GameRoom enemy: ', responseCreate.data);
+      // console.log('responseCreate.data en GameRoom enemy: ', responseCreate.data);
       const response = await axios.get('/api/enemies', {
       withCredentials: true,
     });
-      console.log('Respuesta obtenida al crear enemigos GameRoom; ', response.data);
+      // console.log('Respuesta obtenida al crear enemigos GameRoom; ', response.data);
       setEnemies(response.data);
     } catch (error) {
       console.error('Error al crear el enemigo:', error);
