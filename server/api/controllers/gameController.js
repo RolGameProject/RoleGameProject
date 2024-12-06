@@ -237,7 +237,7 @@ const getGameDetails = async (req, res) => {
         //     userId: character.userId.toString(),
         // }));
 
-        console.log('game en gameController después de populate: ', game);
+        // console.log('game en gameController después de populate: ', game);
         
         // Obtener los IDs de los jugadores
         const playerIds = game.players.map(player => player._id);
@@ -269,7 +269,12 @@ const getGameDetails = async (req, res) => {
                 id: character._id.toString(),
                 name: character.name,
                 classType: character.classType,
-                abilities: character.abilities,
+                abilities: character.abilities/*,*/.map(ability => ({
+                    name: ability.name,
+                    value: ability.value,
+                    enabled: ability.enabled,
+                    id: ability._id.toString(),
+                })),
                 health: character.health,
                 userId: character.userId.toString(),
             })),
