@@ -183,18 +183,14 @@ const fetchAllData = useCallback(async () => {
         </div>
 
         <Row>
-          <Col md={6}>
+         <Col md={6}>
             <h3>Personajes en la Partida</h3>
             {gameDetails && gameDetails.characters.length > 0 ? (
-              gameDetails.characters.map((character) => (
-                <div key={character.id}>
-                  <EntityCardList
-                    entities={[character]} // Pasamos solo el personaje actual
-                    entityType="character"
-                    onEntitySelect={setSelectedCharacter} // Establecer personaje seleccionado
-                  />
-                </div>
-              ))
+              <EntityCardList
+                entities={gameDetails.characters} // Pasamos todos los personajes directamente
+                entityType="character"
+                onEntitySelect={setSelectedCharacter} // Establecer personaje seleccionado
+              />
             ) : (
               <p>No hay personajes en la partida.</p>
             )}
