@@ -185,7 +185,7 @@ const fetchAllData = useCallback(async () => {
         <Row>
           <Col md={6}>
             <h3>Personajes en la Partida</h3>
-            {gameDetails && gameDetails./*players.*/characters.length > 0 ? (
+            {/*gameDetails && */gameDetails./*players.*/characters.length > 0 ? (
               gameDetails./*players*/characters.map((/*player*/character) => (
                 <div key={/*player*/character.id}>
                   {/*player*/gameDetails.characters.length > 0 ? (
