@@ -295,6 +295,19 @@ const getGameDetails = async (req, res) => {
                 email: player.email,
                 characters: charactersByPlayer[player._id.toString()] || [], // Personajes del jugador
             })),
+            characters: game.characters.map(character => ({
+                id: character._id.toString(),
+                name: character.name,
+                classType: character.classType,
+                abilities: character.abilities.map(ability => ({
+                    name: ability.name,
+                    value: ability.value,
+                    enabled: ability.enabled,
+                    id: ability._id.toString(),
+                })),
+                health: character.health,
+                userId: character.userId.toStrong(),
+            })),
             // characters: charactersFormatted,
             status: game.status,
             // gameState: game.gameState,
