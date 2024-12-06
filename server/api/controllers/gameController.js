@@ -210,7 +210,7 @@ const getGameDetails = async (req, res) => {
             .populate('gameMaster', 'googleId displayName email') // Datos del máster
             .populate('players', 'googleId displayName email') // Datos de los jugadores
             .populate('finishedPlayers', 'googleId displayName email') // Jugadores que han terminado turno
-            .populate('characters');
+            .populate('characters', 'name classType health abilities userId');
 
         if (!game) {
             // Si no se encuentra la partida, devolvemos un error 404
