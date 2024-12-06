@@ -188,7 +188,7 @@ const fetchAllData = useCallback(async () => {
             {gameDetails && gameDetails.players./*characters.*/length > 0 ? (
               gameDetails.players/*characters*/.map((player/*character*/) => (
                 <div key={player/*character*/.id}>
-                  {player/*gameDetails.characters*/.length > 0 ? (
+                  {player/*gameDetails*/.characters.length > 0 ? (
                     <EntityCardList
                       entities={player/*gameDetails*/.characters}  // Pasamos los personajes del jugador
                       entityType="character"
