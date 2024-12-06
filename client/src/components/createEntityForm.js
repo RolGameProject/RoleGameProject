@@ -26,7 +26,7 @@ const CreateEntityForm = ({ show, handleClose, handleCreate, entityType }) => {
     React.useEffect(() => {
         const fetchUser = async () => {
             const user = await getCurrentUser();
-            if (user) setCreatedBy(user.userId);
+            if (user) setCreatedBy(user./*userI*/id);
         };
         fetchUser();
     }, []);
