@@ -260,6 +260,17 @@ const getGameDetails = async (req, res) => {
             gameMaster: game.gameMaster,
             players: game.players.map(player => player._id),
             characters: charactersFormatted,
+            status: game.status,
+            currentTurn: game.currentTurn,
+            finishedPlayers: game.finishedPlayers.map(player => ({
+                id: player._id.toString(),
+                googleId: player.googleId,
+                displayName: player.displayName,
+                email: player.email,
+            })),
+            createdAt: game.createdAt,
+            updatedAt: game.updatedAt,
+            discordChannelId: game.discordChannelId,
         });
 
         // Construir la respuesta incluyendo los personajes
@@ -281,7 +292,7 @@ const getGameDetails = async (req, res) => {
             })),
             characters: charactersFormatted,
             status: game.status,
-            gameState: game.gameState,
+            // gameState: game.gameState,
             currentTurn: game.currentTurn,
             finishedPlayers: game.finishedPlayers.map(player => ({
                 id: player._id.toString(),
