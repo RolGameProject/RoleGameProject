@@ -185,21 +185,12 @@ const fetchAllData = useCallback(async () => {
         <Row>
           <Col md={6}>
             <h3>Personajes en la Partida</h3>
-            // {gameDetails && gameDetails.characters.length > 0 ? (
-            //   <EntityCardList
-            //     entities={gameDetails.characters} // Pasamos directamente todos los personajes
-            //     entityType="character"
-            //     onEntitySelect={setSelectedCharacter}
-            //   />
-            // ) : (
-            //   <p>No hay personajes en la partida.</p>
-            // )}
-            {gameDetails && gameDetails./*players.*/characters.length > 0 ? (
-              gameDetails./*players*/characters.map((/*player*/character) => (
-                <div key={/*player*/character.id}>
-                  {/*player*/gameDetails.characters.length > 0 ? (
+            {gameDetails && gameDetails.characters.length > 0 ? (
+              gameDetails.characters.map((character) => (
+                <div key={character.id}>
+                  {gameDetails.characters.length > 0 ? (
                     <EntityCardList
-                      entities={/*player*/gameDetails.characters}  // Pasamos los personajes del jugador
+                      entities={gameDetails.characters}  // Pasamos los personajes directamente
                       entityType="character"
                       onEntitySelect={setSelectedCharacter} // Establecer personaje seleccionado
                     />
@@ -209,7 +200,7 @@ const fetchAllData = useCallback(async () => {
                 </div>
               ))
             ) : (
-              <p>No hay /*jugadores*/personajes en la partida.</p>
+              <p>No hay personajes en la partida.</p>
             )}
           </Col>
 
