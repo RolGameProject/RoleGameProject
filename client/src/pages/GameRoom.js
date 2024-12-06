@@ -185,8 +185,8 @@ const fetchAllData = useCallback(async () => {
         <Row>
           <Col md={6}>
             <h3>Personajes en la Partida</h3>
-            // {gameDetails && gameDetails.characters.length > 0 ? (
-            {gameDetails.characters.map((character) => (
+            {gameDetails && gameDetails.characters.length > 0 ? (
+            gameDetails.characters.map((character) => (
                 <div key={character.id}>
                   {gameDetails.characters.length > 0 ? (
                     <EntityCardList
@@ -198,10 +198,10 @@ const fetchAllData = useCallback(async () => {
                     <p>No hay personajes para este jugador.</p>
                   )}
                 </div>
-              ))}
-            // ) : (
-            //   <p>No hay personajes en la partida.</p>
-            // )}
+              ))
+            ) : (
+              <p>No hay personajes en la partida.</p>
+            )}
           </Col>
 
           <Col md={6}>
