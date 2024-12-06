@@ -209,7 +209,8 @@ const getGameDetails = async (req, res) => {
         const game = await Game.findById(gameId)
             .populate('gameMaster', 'googleId displayName email') // Datos del máster
             .populate('players', 'googleId displayName email') // Datos de los jugadores
-            .populate('finishedPlayers', 'googleId displayName email'); // Jugadores que han terminado turno
+            .populate('finishedPlayers', 'googleId displayName email')/*;*/ // Jugadores que han terminado turno
+            .populate('characters', 'name classType health abilities userId');
             // .populate(/*{*/
             //    /* path: */'characters',/*
             //     select:*/ 'name classType health abilities userId',
@@ -236,6 +237,8 @@ const getGameDetails = async (req, res) => {
         //     userId: character.userId.toString(),
         // }));
 
+        console.log('game en gameController después de populate: ', game);
+        
         // Obtener los IDs de los jugadores
         const playerIds = game.players.map(player => player._id);
 
