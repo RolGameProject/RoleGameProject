@@ -60,7 +60,7 @@ const CreateEntityForm = ({ show, handleClose, handleCreate, entityType }) => {
             abilities: abilityValues,
             interactionRequired: entityType === 'enemy' ? interactionRequired : undefined,
             effects: entityType === 'enemy' ? effects : [],
-            createdBy,
+            createdBy: user,
         };
 
         handleCreate(entityData);
