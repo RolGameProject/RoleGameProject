@@ -9,7 +9,6 @@ import Navbar from './components/Navbar';
 import './styles/styles.css';
 
 function App() {
-  console.log("Cargando la aplicación");
 
   return (
     <BrowserRouter> 
