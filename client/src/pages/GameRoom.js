@@ -190,7 +190,7 @@ const fetchAllData = useCallback(async () => {
                 <div key={character.id}>
                   {gameDetails.characters.length > 0 ? (
                     <EntityCardList
-                      entities={/*gameDetails.*/characters}  // Pasamos los personajes directamente
+                      entities={character}  // Pasamos los personajes directamente
                       entityType="character"
                       onEntitySelect={setSelectedCharacter} // Establecer personaje seleccionado
                     />
