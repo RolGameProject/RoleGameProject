@@ -1,7 +1,7 @@
 // src/services/enemyService.js
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL + '/api/enemies/';  // Reemplaza con tu URL de la API
+const API_URL = process.env.REACT_APP_BACKEND_URL + '/api/enemies/';  
 
 // Obtener todos los enemigos
 export const getAllEnemies = async () => {
