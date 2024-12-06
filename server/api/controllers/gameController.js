@@ -265,6 +265,14 @@ const getGameDetails = async (req, res) => {
             gameMaster: game.gameMaster,
             players: game.players.map(player => player._id),
             characters: game.characters.map(character => character._id),
+            characters: game.characters.map(character => ({
+                id: character._id.toString(),
+                name: character.name,
+                classType: character.classType,
+                abilities: character.abilities,
+                health: character.health,
+                userId: character.userId.toString(),
+            })),
             status: game.status,
             currentTurn: game.currentTurn,
             finishedPlayers: game.finishedPlayers.map(player => ({
@@ -299,11 +307,11 @@ const getGameDetails = async (req, res) => {
                 id: character._id.toString(),
                 name: character.name,
                 classType: character.classType,
-                abilities: character.abilities/*.map(ability => ({
+                abilities: character.abilities,/*.map(ability => ({
                     name: ability.name,
                     value: ability.value,
                     enabled: ability.enabled,
-                    id: ability._id.toString()*/,
+                    id: ability._id.toString()*/
                 // })),
                 health: character.health,
                 userId: character.userId.toStrong(),
