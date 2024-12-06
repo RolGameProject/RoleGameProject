@@ -86,10 +86,10 @@ const fetchAllData = useCallback(async () => {
 
   const handleCreateEnemy = async (enemyData) => {
     try {
-      console.log('enemyData en GameRoom antes de enviar: ,' enemyData);
+      console.log('enemyData en GameRoom antes de enviar: ', enemyData);
       await axios.post('/api/enemies', enemyData);
       const response = await axios.get('/api/enemies');
-      console.log('Respuesta obtenida al crear enemigos GameRoom; ,' response.data);
+      console.log('Respuesta obtenida al crear enemigos GameRoom; ', response.data);
       setEnemies(response.data);
     } catch (error) {
       console.error('Error al crear el enemigo:', error);
