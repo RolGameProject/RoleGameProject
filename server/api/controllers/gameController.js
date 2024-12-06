@@ -312,12 +312,12 @@ const getGameDetails = async (req, res) => {
                 id: character._id.toString(),
                 name: character.name,
                 classType: character.classType,
-                abilities: character.abilities,/*.map(ability => ({
+                abilities: character.abilities.map(ability => ({
                     name: ability.name,
                     value: ability.value,
                     enabled: ability.enabled,
-                    id: ability._id.toString()*/
-                // })),
+                    id: ability._id.toString(),
+                })),
                 health: character.health,
                 userId: character.userId.toStrong(),
             })),
