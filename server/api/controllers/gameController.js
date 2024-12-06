@@ -264,7 +264,7 @@ const getGameDetails = async (req, res) => {
             gameName: game.gameName,
             gameMaster: game.gameMaster,
             players: game.players.map(player => player._id),
-            // characters: charactersFormatted,
+            characters: game.characters.map(character => character._id),
             status: game.status,
             currentTurn: game.currentTurn,
             finishedPlayers: game.finishedPlayers.map(player => ({
