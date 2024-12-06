@@ -206,7 +206,7 @@ const fetchAllData = useCallback(async () => {
             //       ) : (
             //         <p>No hay personajes para este jugador.</p>
             //       )}
-                </div>
+                // </div>
               ))
             ) : (
               <p>No hay /*jugadores*/personajes en la partida.</p>
