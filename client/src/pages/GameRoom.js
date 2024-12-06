@@ -92,10 +92,8 @@ const fetchAllData = useCallback(async () => {
       // console.log('user en gameRoom createEnemy: ', user);
       enemyData.createdBy = user.id;
       // console.log('enemyData en GameRoom antes de enviar: ', enemyData);
-      const responseCreate = await axios.post('/api/enemies', enemyData, {
       withCredentials: true,
     });
-      // console.log('responseCreate.data en GameRoom enemy: ', responseCreate.data);
       const response = await axios.get('/api/enemies', {
       withCredentials: true,
     });
