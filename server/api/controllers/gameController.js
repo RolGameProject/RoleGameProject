@@ -212,7 +212,7 @@ const getGameDetails = async (req, res) => {
             .populate('finishedPlayers', 'googleId displayName email') // Jugadores que han terminado turno
             .populate({
                 path: 'characters',
-                select: 'name classType health abilities userId'),
+                select: 'name classType health abilities userId',
             });
 
         if (!game) {
