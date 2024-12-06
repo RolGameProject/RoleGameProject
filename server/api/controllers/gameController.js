@@ -304,7 +304,7 @@ const getGameDetails = async (req, res) => {
                     value: ability.value,
                     enabled: ability.enabled,
                     id: ability._id.toString()*/,
-                })),
+                // })),
                 health: character.health,
                 userId: character.userId.toStrong(),
             })),
