@@ -210,12 +210,30 @@ const getGameDetails = async (req, res) => {
             .populate('gameMaster', 'googleId displayName email') // Datos del máster
             .populate('players', 'googleId displayName email') // Datos de los jugadores
             .populate('finishedPlayers', 'googleId displayName email') // Jugadores que han terminado turno
-            .populate('characters', 'name classType health abilities userId');
+            .populate({
+                path: 'characters',
+                select: 'name classType health abilities userId'),
+            });
 
         if (!game) {
             // Si no se encuentra la partida, devolvemos un error 404
             return res.status(404).json({ message: 'Partida no encontrada' });
         }
+        
+        // Formatear los personajes con habilidades detalladas
+        const charactersFormatted = game.characters.map(character => ({
+            id: character._id.toString(),
+            name: character.name,
+            classType: character.classType,
+            health: character.health,
+            abilities: character.abilities.map(ability => ({
+                name: ability.name,
+                type: ability.type,
+                power: ability.power,
+                cost: ability.cost,
+            })), // Detalle de habilidades
+            userId: character.userId.toString(),
+        }));
 
         // Obtener los IDs de los jugadores
         const playerIds = game.players.map(player => player._id);
@@ -241,7 +259,7 @@ const getGameDetails = async (req, res) => {
             gameName: game.gameName,
             gameMaster: game.gameMaster,
             players: game.players.map(player => player._id),
-            characters: game.characters.map(character => character._id),
+            characters: charactersFormatted,
         });
 
         // Construir la respuesta incluyendo los personajes
@@ -261,14 +279,7 @@ const getGameDetails = async (req, res) => {
                 email: player.email,
                 characters: charactersByPlayer[player._id.toString()] || [], // Personajes del jugador
             })),
-            characters: game.characters.map(character => ({ // Array global de personajes
-                id: character._id.toString(),
-                name: character.name,
-                classType: character.classType,
-                health: character.health,
-                abilities: character.abilities,
-                userId: character.userId.toString(),
-            })),
+            characters: charactersFormatted,
             status: game.status,
             gameState: game.gameState,
             currentTurn: game.currentTurn,
@@ -281,7 +292,6 @@ const getGameDetails = async (req, res) => {
             createdAt: game.createdAt,
             updatedAt: game.updatedAt,
             discordChannelId: game.discordChannelId,
-            discordInviteLink: game.discordInviteLink,
         });
     } catch (error) {
         // Si ocurre un error, respondemos con un código 500
