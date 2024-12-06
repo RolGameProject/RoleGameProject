@@ -185,18 +185,27 @@ const fetchAllData = useCallback(async () => {
         <Row>
           <Col md={6}>
             <h3>Personajes en la Partida</h3>
-            {/*gameDetails && */gameDetails./*players.*/characters.length > 0 ? (
-              gameDetails./*players*/characters.map((/*player*/character) => (
-                <div key={/*player*/character.id}>
-                  {/*player*/gameDetails.characters.length > 0 ? (
-                    <EntityCardList
-                      entities={/*player*/gameDetails.characters}  // Pasamos los personajes del jugador
-                      entityType="character"
-                      onEntitySelect={setSelectedCharacter} // Establecer personaje seleccionado
-                    />
-                  ) : (
-                    <p>No hay personajes para este jugador.</p>
-                  )}
+            {gameDetails && gameDetails.characters.length > 0 ? (
+              <EntityCardList
+                entities={gameDetails.characters} // Pasamos directamente todos los personajes
+                entityType="character"
+                onEntitySelect={setSelectedCharacter}
+              />
+            ) : (
+              <p>No hay personajes en la partida.</p>
+            )}
+            // {gameDetails && gameDetails./*players.*/characters.length > 0 ? (
+            //   gameDetails./*players*/characters.map((/*player*/character) => (
+            //     <div key={/*player*/character.id}>
+            //       {/*player*/gameDetails.characters.length > 0 ? (
+            //         <EntityCardList
+            //           entities={/*player*/gameDetails.characters}  // Pasamos los personajes del jugador
+            //           entityType="character"
+            //           onEntitySelect={setSelectedCharacter} // Establecer personaje seleccionado
+            //         />
+            //       ) : (
+            //         <p>No hay personajes para este jugador.</p>
+            //       )}
                 </div>
               ))
             ) : (
