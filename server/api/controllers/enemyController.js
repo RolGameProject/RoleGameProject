@@ -2,6 +2,7 @@ const { Enemy } = require('../models/enemyModel'); // Importamos el modelo Enemy
 
 // Crear un nuevo enemigo
 const createEnemy = async (req, res) => {
+    console.log('req.cookie en enemyController :', req.cookie);
     try {
         // Extraemos los datos necesarios de la petición
         const { name, type, health, abilities, effects, interactionRequired, createdBy } = req.body;
