@@ -210,6 +210,7 @@ const getGameDetails = async (req, res) => {
             .populate('gameMaster', 'googleId displayName email') // Datos del máster
             .populate('players', 'googleId displayName email') // Datos de los jugadores
             .populate('finishedPlayers', 'googleId displayName email'); // Jugadores que han terminado turno
+            .populate('characters');
 
         if (!game) {
             // Si no se encuentra la partida, devolvemos un error 404
@@ -220,7 +221,7 @@ const getGameDetails = async (req, res) => {
         const playerIds = game.players.map(player => player._id);
 
         // Buscar los personajes asociados a los jugadores
-        const characters = await Character.find({ userId: { $in: playerIds } });
+        const characters = game.characters.map(character => character._id);
 
         // Mapeamos los personajes por jugador
         const charactersByPlayer = playerIds.reduce((acc, playerId) => {
@@ -240,6 +241,7 @@ const getGameDetails = async (req, res) => {
             gameName: game.gameName,
             gameMaster: game.gameMaster,
             players: game.players.map(player => player._id),
+            characters: game.characters.map(character => character._id),
         });
 
         // Construir la respuesta incluyendo los personajes
@@ -258,6 +260,14 @@ const getGameDetails = async (req, res) => {
                 displayName: player.displayName,
                 email: player.email,
                 characters: charactersByPlayer[player._id.toString()] || [], // Personajes del jugador
+            })),
+            characters: game.characters.map(character => ({ // Array global de personajes
+                id: character._id.toString(),
+                name: character.name,
+                classType: character.classType,
+                health: character.health,
+                abilities: character.abilities,
+                userId: character.userId.toString(),
             })),
             status: game.status,
             gameState: game.gameState,
