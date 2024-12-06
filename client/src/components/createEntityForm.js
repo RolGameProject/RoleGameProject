@@ -26,6 +26,7 @@ const CreateEntityForm = ({ show, handleClose, handleCreate, entityType }) => {
     React.useEffect(() => {
         const fetchUser = async () => {
             const user = await getCurrentUser();
+            console.log('user en useEffect createEntityForm: ', user);
             if (user) setCreatedBy(user./*userI*/id);
         };
         fetchUser();
@@ -60,7 +61,7 @@ const CreateEntityForm = ({ show, handleClose, handleCreate, entityType }) => {
             abilities: abilityValues,
             interactionRequired: entityType === 'enemy' ? interactionRequired : undefined,
             effects: entityType === 'enemy' ? effects : [],
-            createdBy: user,
+            createdBy,
         };
 
         handleCreate(entityData);
