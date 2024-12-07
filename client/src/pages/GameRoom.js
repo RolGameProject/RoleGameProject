@@ -99,6 +99,7 @@ const fetchAllData = useCallback(async () => {
       console.log('Respuesta obtenida al crear enemigos GameRoom; ', response.data);
       setEnemies(response.data);
     } catch (error) {
+      console.log('Error al crear el enemigo');
       console.error('Error al crear el enemigo:', error);
     }
   };
