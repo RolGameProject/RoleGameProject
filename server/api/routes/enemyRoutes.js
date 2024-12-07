@@ -1,5 +1,6 @@
 // Rutas de enemigos
 
+const enemyController = require('../controllers/enemyController');
 const { ensureAuthenticated } = require('../controllers/gameController');
 
 const express = require('express');
