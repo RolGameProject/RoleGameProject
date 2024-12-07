@@ -5,6 +5,7 @@ const createEnemy = async (req, res) => {
     console.log('req.cookie en enemyController :', req.cookie);
     console.log('req.user en enemyController :', req.user);
     console.log('req.body en enemyController: ', req.body);
+    console.log('req en enemyController: ', req);
     try {
         // Extraemos los datos necesarios de la petición
         const { name, type, health, abilities, effects, interactionRequired, createdBy } = req.body;
