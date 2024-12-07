@@ -62,7 +62,7 @@ const CreateEntityForm = ({ show, handleClose, handleCreate, entityType }) => {
             effects: entityType === 'enemy' ? effects : [],
             createdBy,
         };
-
+        console.log(entityData);
         handleCreate(entityData);
         handleClose();
         resetForm();
