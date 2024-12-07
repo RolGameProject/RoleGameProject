@@ -251,7 +251,7 @@ const fetchAllData = useCallback(async () => {
                       <option key={character.id} value={character.id}>
                         {character.name}
                       </option>
-                    ))
+                    )/*)*/
                   )}
                 </Form.Control>
               </Form.Group>
