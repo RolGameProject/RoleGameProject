@@ -1,5 +1,7 @@
 // Rutas de enemigos
 
+const { ensureAuthenticated } = require('../controllers/gameController');
+
 const express = require('express');
 const {
     createEnemy,
@@ -12,7 +14,7 @@ const {
 const router = express.Router();
 
 // Rutas para los enemigos
-router.post('/', createEnemy); // Crear enemigo
+router.post('/', ensureAuthenticated, enemyController.createEnemy); // Crear enemigo
 router.get('/', getAllEnemies); // Obtener todos los enemigos
 router.get('/:id', getEnemyById); // Obtener enemigo por ID
 router.put('/:id', updateEnemy); // Actualizar enemigo
