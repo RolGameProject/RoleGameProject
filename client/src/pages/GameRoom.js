@@ -97,7 +97,8 @@ const fetchAllData = useCallback(async () => {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
-        });
+        },
+      });
       console.log('Respuesta obtenida al crear enemigos GameRoom; ', response.data);
       setEnemies(response.data);
     } catch (error) {
