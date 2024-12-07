@@ -246,8 +246,8 @@ const fetchAllData = useCallback(async () => {
                   }}
                 >
                   <option value="">Seleccione un personaje</option>
-                  {gameDetails?.players.flatMap(player =>
-                    player.characters.map(character => (
+                  {/*gameDetails?.players.flatMap(player =>*/
+                    gameDetails?.characters.map(character => (
                       <option key={character.id} value={character.id}>
                         {character.name}
                       </option>
