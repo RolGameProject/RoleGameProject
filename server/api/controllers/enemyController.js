@@ -22,6 +22,7 @@ const createEnemy = async (req, res) => {
         
         // Guardamos el enemigo en la base de datos
         await enemy.save();
+        console.log('Enemy en enemyController: ', enemy);
         // Devolvemos una respuesta con un mensaje de éxito y el enemigo creado
         res.status(201).json({ message: 'Enemigo creado exitosamente', enemy });
     } catch (error) {
