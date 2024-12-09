@@ -1,8 +1,8 @@
 // src/services/gameService.js
 import axios from 'axios';
-import { getCurrentUser } from './userService'; // Ajusta la ruta según tu estructura de carpetas
+import { getCurrentUser } from './userService'; 
 
-const API_URL = process.env.REACT_APP_BACKEND_URL;  // Cambia esto por la URL de tu servidor en producción si es necesario
+const API_URL = process.env.REACT_APP_BACKEND_URL;  
 
 // Crear una nueva partida
 export const createGame = async (gameData) => {
