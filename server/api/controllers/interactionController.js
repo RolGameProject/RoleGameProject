@@ -13,8 +13,8 @@ const interaction = async (req, res) => {
 
     try {
         // Depuración: Verifica que el modelo Enemy tiene las funciones esperadas
-        console.log('Enemy.updateOne:', typeof Enemy.updateOne); // Debe ser 'function'
-        console.log('Enemy.findById:', typeof Enemy.findById); // Debe ser 'function'
+        // console.log('Enemy.updateOne:', typeof Enemy.updateOne); 
+        // console.log('Enemy.findById:', typeof Enemy.findById); 
 
         // Usa datos del front si son completos; si no, obtén los datos desde la base de datos
         const characterDocument =
