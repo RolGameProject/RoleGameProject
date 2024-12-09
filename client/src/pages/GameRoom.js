@@ -46,7 +46,7 @@ function GameRoom() {
 
       setGameDetails(game);
       // console.log('GameDetails en GameRoom: ', gameDetails);
-      console.log('game en GameRoom: ', game);
+      // console.log('game en GameRoom: ', game);
       setIsMaster(game.gameMaster.id === user./*userI*/id);
     } catch (error) {
       // console.log('Error en fetchGameDetails');
