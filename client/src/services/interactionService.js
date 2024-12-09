@@ -9,7 +9,7 @@ export const interact = async (character, enemy, selectedStat, diceType) => {
     const response = await axios.post(
       API_URL, 
       { character, enemy, selectedStat, diceType },
-      { withCredentials: true } // Para asegurarte de que se enviarán las cookies de sesión
+      { withCredentials: true }
     );
     return response.data; // Retorna el resultado de la interacción
   } catch (error) {
