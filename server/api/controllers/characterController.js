@@ -1,5 +1,5 @@
 const { Character, ABILITY_NAMES, CLASS_NAMES } = require('../models/characterModel'); // Importamos el modelo Character junto con las constantes para nombres de habilidades y clases
-// const User = require('../models/userModel'); // Importamos el modelo User para verificar usuarios
+
 
 exports.createCharacter = async (req, res) => {
   const { name, classType, abilities, health } = req.body;
