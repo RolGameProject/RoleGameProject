@@ -4,9 +4,9 @@ const { Character, ABILITY_NAMES, CLASS_NAMES } = require('../models/characterMo
 exports.createCharacter = async (req, res) => {
   const { name, classType, abilities, health } = req.body;
 
-console.log('req en characterController createCharacter: ', req);
-console.log('req.user en characterController createCharacter: ', req.user);
-console.log('req.cookie en characterController createCharacter: ', req.cookie);
+// console.log('req en characterController createCharacter: ', req);
+// console.log('req.user en characterController createCharacter: ', req.user);
+// console.log('req.cookie en characterController createCharacter: ', req.cookie);
   
   // Verificar que el usuario esté autenticado (y que req.user exista)
   if (!req.user) {
