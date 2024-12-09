@@ -6,7 +6,7 @@ const API_URL = process.env.REACT_APP_BACKEND_URL + '/api/enemies/';
 // Obtener todos los enemigos
 export const getAllEnemies = async () => {
   try {
-    const response = await axios.get(API_URL);  // Esto ya está correcto
+    const response = await axios.get(API_URL);  
     return response.data;
   } catch (error) {
     console.error("Error al obtener los enemigos", error);
@@ -17,7 +17,7 @@ export const getAllEnemies = async () => {
 // Crear un nuevo enemigo
 export const createEnemy = async (enemyData) => {
   try {
-    const response = await axios.post(API_URL, enemyData);  // Esto también es correcto
+    const response = await axios.post(API_URL, enemyData);  
     return response.data;
   } catch (error) {
     console.error("Error al crear el enemigo", error);
@@ -28,7 +28,7 @@ export const createEnemy = async (enemyData) => {
 // Obtener un enemigo por ID
 export const getEnemyById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);  // Ruta correcta
+    const response = await axios.get(`${API_URL}/${id}`);  
     return response.data;
   } catch (error) {
     console.error("Error al obtener el enemigo", error);
@@ -39,7 +39,7 @@ export const getEnemyById = async (id) => {
 // Actualizar un enemigo por ID
 export const updateEnemy = async (id, updatedData) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, updatedData);  // Ruta correcta
+    const response = await axios.put(`${API_URL}/${id}`, updatedData);  
     return response.data;
   } catch (error) {
     console.error("Error al actualizar el enemigo", error);
@@ -50,7 +50,7 @@ export const updateEnemy = async (id, updatedData) => {
 // Eliminar un enemigo por ID
 export const deleteEnemy = async (id) => {
   try {
-    await axios.delete(`${API_URL}/${id}`);  // Ruta correcta
+    await axios.delete(`${API_URL}/${id}`);  
   } catch (error) {
     console.error("Error al eliminar el enemigo", error);
     throw error;
