@@ -2,12 +2,12 @@
 import axios from 'axios';
 // import { user } from '../../../server/discordClient';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL + '/api/characters'; // Reemplaza con tu URL de la API
+const API_URL = process.env.REACT_APP_BACKEND_URL + '/api/characters'; 
 
 // Obtener todos los personajes
 export const getAllCharacters = async () => {
   try {
-    const response = await axios.get(API_URL);  // Esto ya está correcto
+    const response = await axios.get(API_URL);  
     return response.data;
   } catch (error) {
     console.error("Error al obtener los personajes", error);
@@ -47,7 +47,7 @@ export const getCharactersByUser = async () => {
 // Obtener un personaje por ID
 export const getCharacterById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);  // Aquí ya tenemos la ruta correcta
+    const response = await axios.get(`${API_URL}/${id}`);  
     return response.data;
   } catch (error) {
     console.error("Error al obtener el personaje", error);
@@ -58,7 +58,7 @@ export const getCharacterById = async (id) => {
 // Actualizar un personaje por ID
 export const updateCharacterById = async (id, updatedData) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, updatedData);  // Ruta actualizada
+    const response = await axios.put(`${API_URL}/${id}`, updatedData);  
     return response.data;
   } catch (error) {
     console.error("Error al actualizar el personaje", error);
@@ -69,7 +69,7 @@ export const updateCharacterById = async (id, updatedData) => {
 // Eliminar un personaje por ID
 export const deleteCharacter = async (id) => {
   try {
-    await axios.delete(`${API_URL}/${id}`);  // Ruta correcta
+    await axios.delete(`${API_URL}/${id}`); 
   } catch (error) {
     console.error("Error al eliminar el personaje", error);
     throw error;
