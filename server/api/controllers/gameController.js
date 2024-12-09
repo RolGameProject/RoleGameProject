@@ -77,14 +77,14 @@ const getAllGames = async (req, res) => {
 
 // Crear una nueva partida
 const createGame = async (req, res) => {
-    try {
-        console.log('req en createGame Controller: ', req);
-        console.log('req.user en createGame Controller: ', req.user);
+    // try {
+    //     console.log('req en createGame Controller: ', req);
+    //     console.log('req.user en createGame Controller: ', req.user);
 
         // Extraemos el nombre de la partida y el gameMaster del cuerpo de la petición
         const { gameName } = req.body;
         const gameMaster = req.user._id;
-        console.log('req.body en createGame Controller: ', req.body);
+        // console.log('req.body en createGame Controller: ', req.body);
         // Verificamos si el gameMaster existe en la base de datos
         const masterExists = await User.findById(gameMaster);
         if (!masterExists) {
@@ -124,7 +124,7 @@ const joinGame = async (req, res) => {
     // console.log('playerId en controlador: ', playerId);
     // console.log('characterId en controlador: ', characterId);
     try {
-        console.log('Solicitud recibida en joinGame:', req.body); // Log de los datos recibidos en el servidor
+        // console.log('Solicitud recibida en joinGame:', req.body); // Log de los datos recibidos en el servidor
 
         // Extraemos el ID de la partida y el ID del jugador del cuerpo de la petición
         const { gameName, playerId, characterId } = req.body;
@@ -138,7 +138,7 @@ const joinGame = async (req, res) => {
         const playerExists = await User.findById(playerId);
         if (!playerExists) {
             
-            console.log('Jugador no encontrado:', playerId);
+            // console.log('Jugador no encontrado:', playerId);
 
             return res.status(404).json({ message: 'Jugador no encontrado' });
         }
@@ -147,13 +147,13 @@ const joinGame = async (req, res) => {
         const character = await Character.findById(characterId);
         if (!character) {
             
-            console.log('Personaje no encontrado:', characterId);
+            // console.log('Personaje no encontrado:', characterId);
             return res.status(404).json({ message: 'Personaje no encontrado' });
         }
 
         // Verificamos si el personaje pertenece al jugador
         if (character.userId.toString() !== playerId) {
-            console.log('El personaje no pertenece al jugador:', { playerId, characterUserId: character.userId });
+            // console.log('El personaje no pertenece al jugador:', { playerId, characterUserId: character.userId });
       
             return res.status(403).json({ message: 'El personaje no pertenece al jugador' });
         }
@@ -161,13 +161,13 @@ const joinGame = async (req, res) => {
         // Buscamos la partida por su ID
         const game = await Game.findById(gameName);
         if (!game) {
-            console.log('Partida no encontrada:', gameName);
+            // console.log('Partida no encontrada:', gameName);
             return res.status(404).json({ message: 'Partida no encontrada' });
         }
 
         // Verificamos si la partida está activa
         if (game.status !== 'active') {
-            console.log('La partida no está activa:', game.status);
+            // console.log('La partida no está activa:', game.status);
             return res.status(400).json({ message: 'La partida no está activa.' });
         } 
 
@@ -181,12 +181,12 @@ const joinGame = async (req, res) => {
             game.players.push(playerId);
             await game.save(); // Guardamos los cambios en la base de datos
         }
-        console.log('Estado actualizado del juego:', game);
+        // console.log('Estado actualizado del juego:', game);
 
         // Crear la invitación para el canal de Discord de la partida
         const invite = await discordClient.createGameInvite(game.discordChannelId); // Usamos el ID del canal para crear la invitación
 
-        console.log('invite en controlador partidas: ', invite);
+        // console.log('invite en controlador partidas: ', invite);
 
         // Devolvemos la información de la partida actualizada
         res.status(200).json({
