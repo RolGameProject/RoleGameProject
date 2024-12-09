@@ -54,7 +54,6 @@ function NavbarComponent() {
           />
         </Navbar.Brand>
         <Nav className="ml-auto">
-          {/* Evitar redirecciones innecesarias */}
           <Nav.Link as={Link} to="/">Inicio</Nav.Link>
           {isAuthenticated ? (
             <>
