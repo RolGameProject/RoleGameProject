@@ -24,7 +24,7 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 
 // Manejo de evento
 client.once('ready', () => {
-    console.log('El bot está listo y conectado a Discord');
+    // console.log('El bot está listo y conectado a Discord');
 });
 
 // Crear un canal de voz para el juego
