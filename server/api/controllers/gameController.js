@@ -77,7 +77,7 @@ const getAllGames = async (req, res) => {
 
 // Crear una nueva partida
 const createGame = async (req, res) => {
-    // try {
+    try {
     //     console.log('req en createGame Controller: ', req);
     //     console.log('req.user en createGame Controller: ', req.user);
 
