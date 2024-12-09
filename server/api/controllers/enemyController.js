@@ -2,10 +2,10 @@ const { Enemy } = require('../models/enemyModel'); // Importamos el modelo Enemy
 
 // Crear un nuevo enemigo
 const createEnemy = async (req, res) => {
-    console.log('req.cookie en enemyController :', req.cookie);
-    console.log('req.user en enemyController :', req.user);
-    console.log('req.body en enemyController: ', req.body);
-    console.log('req en enemyController: ', req);
+    // console.log('req.cookie en enemyController :', req.cookie);
+    // console.log('req.user en enemyController :', req.user);
+    // console.log('req.body en enemyController: ', req.body);
+    // console.log('req en enemyController: ', req);
     try {
         // Extraemos los datos necesarios de la petición
         const { name, type, health, abilities, effects, interactionRequired, createdBy } = req.body;
@@ -20,11 +20,11 @@ const createEnemy = async (req, res) => {
             interactionRequired,
             createdBy,
         });
-        console.log('Enemy en enemyController: ', enemy);
+        // console.log('Enemy en enemyController: ', enemy);
         
         // Guardamos el enemigo en la base de datos
         await enemy.save();
-        console.log('Enemy en enemyController antes de guardar: ', enemy);
+        // console.log('Enemy en enemyController antes de guardar: ', enemy);
         // Devolvemos una respuesta con un mensaje de éxito y el enemigo creado
         res.status(201).json({ message: 'Enemigo creado exitosamente', enemy });
     } catch (error) {
