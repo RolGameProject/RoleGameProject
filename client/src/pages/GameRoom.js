@@ -149,7 +149,7 @@ const fetchAllData = useCallback(async () => {
                 {isMaster ? (
                   <Button
                     variant="primary"
-                    onClick={() => window.open('https://discord.gg/j5mFc88z', '_blank')}
+                    onClick={() => window.open('https://discord.gg/NnVxZvZMJ5', '_blank')}
                   >
                     Ir al servidor de Discord
                   </Button>
